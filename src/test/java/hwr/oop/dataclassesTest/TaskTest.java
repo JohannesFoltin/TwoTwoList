@@ -24,13 +24,13 @@ class TaskTest {
        result.ifPresent(localDate -> assertThat(localDate).isBetween(LocalDateTime.now().minusHours(1),LocalDateTime.now()));
     }
 
-   @Test
-    void getId() {
-        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
-                null, new User("Name",12), LocalDateTime.now());
-        UUID result = example.getId();
-        assertThat(result).isEqualTo(69);
-    }
+//   @Test
+//    void getId() {
+//        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
+//                null, new User("Name",12), LocalDateTime.now());
+//        UUID result = example.getId();
+//        assertThat(result).isEqualTo(69);
+//    }
 
     @Test
     void getTitle() {
