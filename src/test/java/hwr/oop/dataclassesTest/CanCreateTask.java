@@ -51,7 +51,13 @@ public class CanCreateTask {
     @Test
     void canCreateTask(){
         CreateTaskService createTaskService = new CreateTaskService(loadTaskPort,saveTaskPort);
-        createTaskService.createTask("Test","sa",TaskState.DONE,null,null, LocalDateTime.now());
-        Assertions.assertThat()
+        LocalDateTime now = LocalDateTime.now();
+        createTaskService.createTask("Test","sa",TaskState.DONE,null,null, now);
+        Task createdTask = tasks.get(tasks.size()-1);
+        Assertions.assertThat(createdTask.getTitle()).isEqualTo("Test");
+        Assertions.assertThat(createdTask.getContent()).isEqualTo("sa");
+        Assertions.assertThat(createdTask.getTaskState()).isEqualTo(TaskState.DONE);
+        Assertions.assertThat(createdTask.getCreator()).isEqualTo(null);
+        Assertions.assertThat(createdTask.getDeadline()).isEqualTo(now);
     };
 }
