@@ -16,14 +16,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class CanCreateTaskTest {
+
+    //The "Persistence". You can copy that (and the setUp() Method) for future Tests
     LoadTaskPort loadTaskPort;
     SaveTaskPort saveTaskPort;
-
     List<Task> tasks;
 
+    //Is executed before every Test
     @BeforeEach
     void setUp() {
         tasks = new ArrayList<>();
+        //Add empty Task (for fun ;) )
         Task taskTmp = new Task("","",null,null,null,null);
         tasks.add(taskTmp);
         loadTaskPort = new LoadTaskPort() {
@@ -52,10 +55,16 @@ class CanCreateTaskTest {
 
     @Test
     void canCreateTask(){
+        //JavaClass init
         CreateTaskService createTaskService = new CreateTaskService(loadTaskPort,saveTaskPort);
+
         LocalDateTime now = LocalDateTime.now();
         createTaskService.createTask("Test","sa",TaskState.DONE,null,null, now);
+
+        //Get last Task (that theoretically has been added)
         Task createdTask = tasks.get(tasks.size()-1);
+
+        //Assertions
         assertThat(createdTask.getTitle()).isEqualTo("Test");
         assertThat(createdTask.getContent()).isEqualTo("sa");
         assertThat(createdTask.getTaskState()).isEqualTo(TaskState.DONE);
