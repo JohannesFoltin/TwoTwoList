@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -17,7 +18,7 @@ class TaskTest {
 
     @Test
     void getDeadline() {
-        Task example = new Task(1,"Title","Content", TaskState.IN_PROGRESS,
+        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
                 null, new User("Name",12), LocalDateTime.now());
         Optional<LocalDateTime> result = example.getDeadline();
        result.ifPresent(localDate -> assertThat(localDate).isBetween(LocalDateTime.now().minusHours(1),LocalDateTime.now()));
@@ -25,15 +26,15 @@ class TaskTest {
 
    @Test
     void getId() {
-        Task example = new Task(69,"Title","Content", TaskState.IN_PROGRESS,
+        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
                 null, new User("Name",12), LocalDateTime.now());
-        Integer result = example.getId();
+        UUID result = example.getId();
         assertThat(result).isEqualTo(69);
     }
 
     @Test
     void getTitle() {
-        Task example = new Task(69,"Title","Content", TaskState.IN_PROGRESS,
+        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
                 null, new User("Name",12), LocalDateTime.now());
         String result = example.getTitle();
         assertThat(result).isEqualTo("Title");
@@ -41,7 +42,7 @@ class TaskTest {
 
     @Test
     void getContent() {
-        Task example = new Task(69,"Title","Content", TaskState.IN_PROGRESS,
+        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
                 null, new User("Name",12), LocalDateTime.now());
         String result = example.getContent();
         assertThat(result).isEqualTo("Content");
@@ -49,7 +50,7 @@ class TaskTest {
 
     @Test
     void getTaskState() {
-        Task example = new Task(69,"Title","Content", TaskState.IN_PROGRESS,
+        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
                 null, new User("Name",12), LocalDateTime.now());
         TaskState result = example.getTaskState();
         assertThat(result).isEqualTo(TaskState.IN_PROGRESS);
@@ -59,7 +60,7 @@ class TaskTest {
     void getTaskTagList() {
         List<TaskTag> list = new ArrayList<>();
         list.add(new TaskTag("Kitchen",2));
-        Task example = new Task(69,"Title","Content", TaskState.IN_PROGRESS,
+        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
                 list, new User("Name",12), LocalDateTime.now());
         List<TaskTag> result = example.getTaskTagList();
         assertThat(result).isEqualTo(list);
@@ -68,7 +69,7 @@ class TaskTest {
     @Test
     void getCreator() {
         User user = new User("Name",12);
-        Task example = new Task(69,"Title","Content", TaskState.IN_PROGRESS,
+        Task example = new Task("Title","Content", TaskState.IN_PROGRESS,
                 null, user, LocalDateTime.now());
         User result = example.getCreator();
        assertThat(result).isEqualTo(user);
@@ -78,7 +79,7 @@ class TaskTest {
     @EnumSource(value = TaskState.class, names = {"IN_REVIEW", "IN_PROGRESS"})
     void completeTaskSuccessfully(TaskState state) {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", state, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", state, null, user, LocalDateTime.now());
         try {
             test.completeTask();
             assertThat(test.getTaskState()).isEqualTo(TaskState.DONE);
@@ -91,7 +92,7 @@ class TaskTest {
     @EnumSource(value = TaskState.class, names = {"IN_PROGRESS", "IN_REVIEW"}, mode = EnumSource.Mode.EXCLUDE)
     void completeTaskUnsuccessfully(TaskState state) {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", state, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", state, null, user, LocalDateTime.now());
         try {
             test.completeTask();
             fail("task should not be completable");
@@ -102,7 +103,7 @@ class TaskTest {
     @Test
     void resetTaskSuccessfullyTest() {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", TaskState.IN_PROGRESS, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", TaskState.IN_PROGRESS, null, user, LocalDateTime.now());
         try {
             test.resetTask();
             assertThat(test.getTaskState()).isEqualTo(TaskState.BACKLOG);
@@ -114,7 +115,7 @@ class TaskTest {
     @EnumSource(value = TaskState.class, names = {"IN_PROGRESS"}, mode = EnumSource.Mode.EXCLUDE)
     void resetTaskUnsuccessfully(TaskState state) {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", state, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", state, null, user, LocalDateTime.now());
         try {
             test.reviewTask();
             fail("task should not be completable");
@@ -126,7 +127,7 @@ class TaskTest {
     @EnumSource(value = TaskState.class, names = {"IN_PROGRESS"}, mode = EnumSource.Mode.EXCLUDE)
     void startTaskSuccessfullyTest(TaskState state) {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", state, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", state, null, user, LocalDateTime.now());
         try {
             test.startTask();
             assertThat(test.getTaskState()).isEqualTo(TaskState.IN_PROGRESS);
@@ -137,7 +138,7 @@ class TaskTest {
     @Test
     void startTaskUnsuccessfullyTest() {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", TaskState.IN_PROGRESS, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", TaskState.IN_PROGRESS, null, user, LocalDateTime.now());
 
         try {
             test.startTask();
@@ -149,7 +150,7 @@ class TaskTest {
     @Test
     void reviewTaskSuccessfullyTest() {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", TaskState.IN_PROGRESS, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", TaskState.IN_PROGRESS, null, user, LocalDateTime.now());
         try {
             test.reviewTask();
             assertThat(test.getTaskState()).isEqualTo(TaskState.IN_REVIEW);
@@ -161,7 +162,7 @@ class TaskTest {
     @EnumSource(value = TaskState.class, names = {"IN_PROGRESS"}, mode = EnumSource.Mode.EXCLUDE)
     void reviewTaskUnsuccessfullyTest(TaskState state) {
         User user = new User("Manfred", 17);
-        Task test = new Task(1, "title", "content", state, null, user, LocalDateTime.now());
+        Task test = new Task("title", "content", state, null, user, LocalDateTime.now());
         try {
             test.reviewTask();
             fail("task should not be completable");
