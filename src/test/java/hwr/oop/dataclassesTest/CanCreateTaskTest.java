@@ -5,7 +5,6 @@ import hwr.oop.application.Task;
 import hwr.oop.application.TaskState;
 import hwr.oop.persistence.LoadTaskPort;
 import hwr.oop.persistence.SaveTaskPort;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CanCreateTask {
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+class CanCreateTaskTest {
     LoadTaskPort loadTaskPort;
     SaveTaskPort saveTaskPort;
 
@@ -43,7 +45,7 @@ public class CanCreateTask {
 
             @Override
             public void saveTask(Task task) {
-                return;
+
             }
         };
     }
@@ -54,10 +56,10 @@ public class CanCreateTask {
         LocalDateTime now = LocalDateTime.now();
         createTaskService.createTask("Test","sa",TaskState.DONE,null,null, now);
         Task createdTask = tasks.get(tasks.size()-1);
-        Assertions.assertThat(createdTask.getTitle()).isEqualTo("Test");
-        Assertions.assertThat(createdTask.getContent()).isEqualTo("sa");
-        Assertions.assertThat(createdTask.getTaskState()).isEqualTo(TaskState.DONE);
-        Assertions.assertThat(createdTask.getCreator()).isEqualTo(null);
-        Assertions.assertThat(createdTask.getDeadline()).isEqualTo(now);
-    };
+        assertThat(createdTask.getTitle()).isEqualTo("Test");
+        assertThat(createdTask.getContent()).isEqualTo("sa");
+        assertThat(createdTask.getTaskState()).isEqualTo(TaskState.DONE);
+        assertThat(createdTask.getCreator()).isNull();
+        createdTask.getDeadline().ifPresent(localDate -> assertThat(localDate).isEqualTo(now));
+    }
 }
