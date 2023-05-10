@@ -1,7 +1,5 @@
 package hwr.oop.application;
 
-import hwr.oop.input.TaskListException;
-
 import java.util.List;
 
 public class TaskList {

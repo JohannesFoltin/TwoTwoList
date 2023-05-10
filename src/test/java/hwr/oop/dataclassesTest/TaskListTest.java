@@ -1,6 +1,6 @@
 package hwr.oop.dataclassesTest;
 
-import hwr.oop.input.TaskListException;
+import hwr.oop.application.TaskListException;
 import hwr.oop.application.Task;
 import hwr.oop.application.TaskList;
 
