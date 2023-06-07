@@ -37,7 +37,12 @@ public class Project {
         }
     }
     public void removePermissionUser(User user){
-        permissions.remove(user);
+        if(permissions.containsKey(user)) {
+            permissions.remove(user);
+        }
+        else{
+            throw new PermissionsException("user not found");
+        }
     }
     private final UUID id;
     private List<Task> taskList;
