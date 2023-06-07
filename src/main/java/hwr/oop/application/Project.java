@@ -28,7 +28,17 @@ public class Project {
     public Map<User, Boolean> getPermissions() {
         return permissions;
     }
-
+    public void changePermission(User user, Boolean permission){
+        if(permissions.containsKey(user)) {
+            permissions.put(user, !permissions.get(user));
+        }
+        else{
+            permissions.put(user, permission);
+        }
+    }
+    public void removePermissionUser(User user){
+        permissions.remove(user);
+    }
     private final UUID id;
     private List<Task> taskList;
     private String title;
