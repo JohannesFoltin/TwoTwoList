@@ -1,7 +1,6 @@
 package hwr.oop.applicationTest;
 
 import hwr.oop.application.*;
-import hwr.oop.application.createtask.CannotCreateTaskException;
 import hwr.oop.application.deletetask.CannotDeleteTaskException;
 import hwr.oop.application.deletetask.DeleteTaskService;
 import hwr.oop.application.deletetask.DeleteTaskUseCase;
@@ -12,10 +11,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

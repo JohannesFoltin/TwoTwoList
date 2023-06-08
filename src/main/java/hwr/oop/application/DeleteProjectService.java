@@ -6,8 +6,8 @@ import hwr.oop.persistence.SavePort;
 import java.util.UUID;
 
 public class DeleteProjectService implements DeleteProjectUseCase {
-    private LoadPort load;
-    private SavePort save;
+    private final LoadPort load;
+    private final SavePort save;
 
     public DeleteProjectService(LoadPort load, SavePort save) {
         this.load = load;
