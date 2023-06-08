@@ -7,15 +7,17 @@ This repository contains a student project created for an ongoing lecture on obj
 
 [TODO]: # (For each feature implemented, add a row to the table!)
 
-| Number | Feature            | Tests |
-|--------|--------------------|-------|
-| 1      | create Task        | check |
-| 2      | delete Task        | /     |
-| 3      | Task with deadline | /     |
-| 4      | create User        | /     |
-| 5      | manage Taskstate   | /     |
-| 6      | manage Deadline    | /     |
-| 7      | create Project     | check |
+| Number | Feature                  | Implemented   | Tested        |
+|--------|--------------------------|:-------------:|:-------------:|
+| 1      | create/delete Project    | - [ ]         | - [ ]         |
+| 2      | rename Project           | - [ ]         | - [ ]         |
+| 3      | add/remove Task          | - [ ]         | - [ ]         |
+| 4      | merge Project            | - [ ]         | - [ ]         |
+| 5      | Project Modifier Access  | - [ ]         | - [ ]         |
+| 6      | create/delete Task       | - [ ]         | - [ ]         |
+| 7      | modify Task Attributes   | - [ ]         | - [ ]         |
+| 8      | edit Task State          | - [ ]         | - [ ]         |
+| 9      | create Kontextliste      | - [ ]         | - [ ]         |
 
 
 
@@ -26,3 +28,4 @@ This repository contains a student project created for an ongoing lecture on obj
 | Number | Dependency Name | Dependency Description | Why is it necessary? |
 |--------|-----------------|------------------------|----------------------|
 | 1      | Gson | (de-)serialization of data from and to JSON | persistenceImplementation |
+| 1      | Gson            | Can be used to convert Java Objects into their JSON representation.                                     | Persistence          |
