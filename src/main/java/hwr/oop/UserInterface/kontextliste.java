@@ -6,12 +6,15 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class kontextliste {
+
     private final Scanner inputStream;
     private final PrintStream outputStream;
-    public  kontextliste(InputStream inputStream, OutputStream outputStream){
+
+    public  kontextliste(InputStream inputStream, OutputStream outputStream) {
         this.inputStream = new Scanner(inputStream);
         this.outputStream = new PrintStream(outputStream);
     }
+
     public void klstart() {
         String input;
 
@@ -31,3 +34,5 @@ public class kontextliste {
 
 
         }
+    }
+}

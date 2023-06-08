@@ -27,8 +27,10 @@ public class Projekte {
         input = inputStream.nextLine();
 
         switch (input) {
-            case "3": addProjectBuilder addProjectBuilder = new addProjectBuilder(System.out,System.in)
+            case "3": addProjectBuilder addProjectBuilder = new addProjectBuilder(System.in,System.out)
 
 
 
         }
+    }
+}

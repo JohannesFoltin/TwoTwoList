@@ -12,19 +12,21 @@ public class addTaskBuilder {
     private final PrintStream outputStream;
     private String taskName;
     private int taskId;
+
     public addTaskBuilder(InputStream inputStream, OutputStream outputStream) {
         this.inputStream = new Scanner(inputStream);
         this.outputStream = new PrintStream(outputStream);
     }
-    public void get_taskName() {
-        OutputStream.Println("Enter a taskname:");
-        taskName = InputStream.nextLine();
+
+    public String get_taskName() {
+        outputStream.println("Enter a taskname:");
+        taskName = inputStream.nextLine();
         return taskName;
     }
 
-    public void get_taskid() {
-        OutputStream.Println("Enter a taskID:");
-        taskId = InputStream.nextLine();
+    public int get_taskid() {
+        outputStream.println("Enter a taskID:");
+        taskId = inputStream.nextInt();
         return taskId;
     }
 }

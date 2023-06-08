@@ -34,7 +34,7 @@ public class menu implements Interfacemenu{
 
             switch (input) {
                 case "1":
-                    inbox inbox = new inbox(System.out,System.in);
+                    inbox inbox = new inbox(System.in,System.out);
                     inbox.istart();
                     break;
                 case "2":

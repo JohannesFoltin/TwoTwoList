@@ -18,15 +18,15 @@ public class addUserBuilder {
         this.outputStream = new PrintStream(outputStream);
     }
 
-    public void get_username() {
-        OutputStream.println("Enter a username:");
-        UserName = InputStream.nextLine();
+    public String get_username() {
+        outputStream.println("Enter a username:");
+        UserName = inputStream.nextLine();
         return UserName;
     }
 
-    public void get_userid() {
-        OutputStream.Println("Enter a UserId:");
-        UserId = InputStream.nextLine();
+    public int get_userid() {
+        outputStream.println("Enter a UserId:");
+        UserId = inputStream.nextInt();
         return UserId;
     }
 }
