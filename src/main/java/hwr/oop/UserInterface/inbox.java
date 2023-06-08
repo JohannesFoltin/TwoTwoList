@@ -9,10 +9,12 @@ public class inbox {
 
     private final Scanner inputStream;
     private final PrintStream outputStream;
-    public  inbox(InputStream inputStream, OutputStream outputStream){
+
+    public  inbox(InputStream inputStream, OutputStream outputStream) {
         this.inputStream = new Scanner(inputStream);
         this.outputStream = new PrintStream(outputStream);
     }
+
     public void istart() {
         String input;
 
