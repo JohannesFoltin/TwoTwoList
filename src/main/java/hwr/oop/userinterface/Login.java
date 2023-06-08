@@ -5,6 +5,8 @@ import hwr.oop.application.ValidateUserUseCase;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.UserNotInAppDataException;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -15,9 +17,9 @@ public class Login {
     private final MainMenu mainMenu;
     private final LoadPort loadPort;
 
-    public Login(Scanner input, PrintStream out, MainMenu mainMenu, LoadPort loadPort) {
-        this.input = input;
-        this.out = out;
+    public Login(InputStream input, OutputStream out, MainMenu mainMenu, LoadPort loadPort) {
+        this.input = new Scanner(input);
+        this.out = new PrintStream(out);
         this.mainMenu = mainMenu;
         this.loadPort = loadPort;
     }
