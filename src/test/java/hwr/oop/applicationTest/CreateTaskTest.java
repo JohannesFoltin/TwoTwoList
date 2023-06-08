@@ -4,6 +4,7 @@ import hwr.oop.application.*;
 import hwr.oop.application.createtask.CannotCreateTaskException;
 import hwr.oop.application.createtask.CreateTaskService;
 import hwr.oop.application.AppData;
+import hwr.oop.application.createtask.CreateTaskUseCase;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,9 +18,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 class CreateTaskTest {
-    private  LoadPort loadPort;
+    private LoadPort loadPort;
     private SavePort savePort;
-    private CreateTaskService createTaskService;
+    private CreateTaskUseCase createTaskService;
     AppData appDataMock;
     @BeforeEach
     void setUp() {
@@ -62,7 +63,6 @@ class CreateTaskTest {
         Task task =  createTaskService.createTaskInProject(title,content,taskState,deadline,project);
 
         Task createdTask = loadPort.loadData().getProjectList().get(0).getTaskList().get(1);
-
         Optional<LocalDateTime> result = createdTask.getDeadline();
 
         assertThat(createdTask.getId()).isEqualTo(task.getId());
