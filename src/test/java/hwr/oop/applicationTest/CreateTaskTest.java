@@ -19,7 +19,7 @@ import java.util.UUID;
 
 class CreateTaskTest {
     private LoadPort loadPort;
-    private SavePort savePort;
+    private MySavePort savePort;
     private CreateTaskUseCase createTaskService;
     AppData appDataMock;
     @BeforeEach
@@ -35,18 +35,7 @@ class CreateTaskTest {
         users.add(new User(UUID.randomUUID(),"TestUser",new ArrayList<>(),new ArrayList<>()));
 
         loadPort = () -> appDataMock;
-        savePort = new SavePort() {
-            private boolean flag = false;
-
-            public boolean isFlag() {
-                return flag;
-            }
-            @Override
-            public void saveData(AppData appData) {
-                this.flag = true;
-                appDataMock = appData;
-            }
-        };
+        savePort = new MySavePort();
         appDataMock = new AppData(projects,users);
 
         createTaskService = new CreateTaskService(loadPort, savePort);
@@ -54,6 +43,7 @@ class CreateTaskTest {
 
     @Test
     void testCreateTaskInProject() {
+
         String title = "Task Title";
         String content = "Task Content";
         TaskState taskState = TaskState.IN_PROGRESS;
@@ -64,7 +54,7 @@ class CreateTaskTest {
 
         Task createdTask = loadPort.loadData().getProjectList().get(0).getTaskList().get(1);
         Optional<LocalDateTime> result = createdTask.getDeadline();
-
+        assertThat(savePort.isFlag()).isTrue();
         assertThat(createdTask.getId()).isEqualTo(task.getId());
         assertThat(createdTask.getTitle()).isEqualTo(title);
         assertThat(createdTask.getContent()).isEqualTo(content);
@@ -102,6 +92,7 @@ class CreateTaskTest {
 
         Optional<LocalDateTime> result = createdTask.getDeadline();
 
+        assertThat(savePort.isFlag()).isTrue();
         assertThat(createdTask.getId()).isEqualTo(task.getId());
         assertThat(createdTask.getTitle()).isEqualTo(title);
         assertThat(createdTask.getContent()).isEqualTo(content);
@@ -122,5 +113,19 @@ class CreateTaskTest {
         assertThatThrownBy(() -> createTaskService.createTaskInContextList(title, content, taskState, deadline, user))
                 .isInstanceOf(CannotCreateTaskException.class)
                 .hasMessage("User not found");
+    }
+
+    private class MySavePort implements SavePort {
+        private boolean flag = false;
+
+        public boolean isFlag() {
+            return flag;
+        }
+
+        @Override
+        public void saveData(AppData appData) {
+            this.flag = true;
+            appDataMock = appData;
+        }
     }
 }
