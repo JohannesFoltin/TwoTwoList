@@ -9,7 +9,7 @@ This repository contains a student project created for an ongoing lecture on obj
 
 | Number | Feature                  | Implemented   | Tested        |
 |--------|--------------------------|:-------------:|:-------------:|
-| 1      | create/delete Project    | <input type="checkbox" />         | <input type="checkbox" />         |
+| 1      | create/delete Project    | <input type="checkbox" checked>         | <input type="checkbox" />         |
 | 2      | rename Project           | <input type="checkbox" />         | <input type="checkbox" />         |
 | 3      | add/remove Task          | <input type="checkbox" />         | <input type="checkbox" />         |
 | 4      | merge Project            | <input type="checkbox" />         | <input type="checkbox" />         |
