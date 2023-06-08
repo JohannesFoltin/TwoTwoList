@@ -2,6 +2,7 @@ package hwr.oop.persistence;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import hwr.oop.application.AppData;
 
 import java.io.*;
 import java.time.LocalDateTime;

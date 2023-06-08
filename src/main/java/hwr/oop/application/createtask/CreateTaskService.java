@@ -1,6 +1,10 @@
-package hwr.oop.application;
+package hwr.oop.application.createtask;
 
-import hwr.oop.persistence.AppData;
+import hwr.oop.application.Project;
+import hwr.oop.application.Task;
+import hwr.oop.application.TaskState;
+import hwr.oop.application.User;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 
@@ -30,7 +34,7 @@ public class CreateTaskService implements CreateTaskUseCase{
             return taskTmp;
         }
         else {
-            throw new CreateTaskException("Project not found");
+            throw new CannotCreateTaskException("Project not found");
         }
     }
 
@@ -46,7 +50,7 @@ public class CreateTaskService implements CreateTaskUseCase{
             return taskTmp;
         }
         else {
-            throw new CreateTaskException("User not found");
+            throw new CannotCreateTaskException("User not found");
         }
     }
 }

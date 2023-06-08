@@ -1,7 +1,9 @@
 package hwr.oop.applicationTest;
 
 import hwr.oop.application.*;
-import hwr.oop.persistence.AppData;
+import hwr.oop.application.createtask.CannotCreateTaskException;
+import hwr.oop.application.createtask.CreateTaskService;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +18,11 @@ import java.util.UUID;
 
 class CreateTaskTest {
     private  LoadPort loadPort;
+    private SavePort savePort;
     private CreateTaskService createTaskService;
     AppData appDataMock;
     @BeforeEach
     void setUp() {
-
         List<Project> projects = new ArrayList<>();
         UUID id = UUID.randomUUID();
         projects.add(new Project(id,new ArrayList<>(),"Test Project",null));
@@ -31,11 +33,20 @@ class CreateTaskTest {
         List<User> users = new ArrayList<>();
         users.add(new User(UUID.randomUUID(),"TestUser",new ArrayList<>(),new ArrayList<>()));
 
-
         loadPort = () -> appDataMock;
-        SavePort savePort = appData -> appDataMock = appData;
+        savePort = new SavePort() {
+            private boolean flag = false;
 
-        savePort.saveData(new AppData(projects,users));
+            public boolean isFlag() {
+                return flag;
+            }
+            @Override
+            public void saveData(AppData appData) {
+                this.flag = true;
+                appDataMock = appData;
+            }
+        };
+        appDataMock = new AppData(projects,users);
 
         createTaskService = new CreateTaskService(loadPort, savePort);
     }
@@ -71,7 +82,7 @@ class CreateTaskTest {
         Project project = new Project(UUID.randomUUID(),new ArrayList<>(),"Test",null);
 
         assertThatThrownBy(() -> createTaskService.createTaskInProject(title, content, taskState, deadline, project))
-                .isInstanceOf(CreateTaskException.class)
+                .isInstanceOf(CannotCreateTaskException.class)
                 .hasMessage("Project not found");
 
     }
@@ -109,7 +120,7 @@ class CreateTaskTest {
         User user = new User(UUID.randomUUID(),"Test not known", new ArrayList<>(),new ArrayList<>());
 
         assertThatThrownBy(() -> createTaskService.createTaskInContextList(title, content, taskState, deadline, user))
-                .isInstanceOf(CreateTaskException.class)
+                .isInstanceOf(CannotCreateTaskException.class)
                 .hasMessage("User not found");
     }
 }

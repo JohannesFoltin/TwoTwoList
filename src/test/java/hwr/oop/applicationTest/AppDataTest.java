@@ -1,6 +1,6 @@
-package hwr.oop.persistenceTest;
+package hwr.oop.applicationTest;
 
-import hwr.oop.applicationTest.RandomTestData;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

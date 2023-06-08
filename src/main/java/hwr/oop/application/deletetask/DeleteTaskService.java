@@ -1,6 +1,9 @@
-package hwr.oop.application;
+package hwr.oop.application.deletetask;
 
-import hwr.oop.persistence.AppData;
+import hwr.oop.application.Project;
+import hwr.oop.application.Task;
+import hwr.oop.application.User;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 
@@ -9,7 +12,7 @@ public class DeleteTaskService implements DeleteTaskUseCase {
     private final SavePort savePort;
     private final LoadPort loadPort;
 
-    public DeleteTaskService(SavePort savePort, LoadPort loadPort) {
+    public DeleteTaskService(LoadPort loadPort,SavePort savePort) {
         this.savePort = savePort;
         this.loadPort = loadPort;
     }
@@ -23,12 +26,12 @@ public class DeleteTaskService implements DeleteTaskUseCase {
             if (isDeleted) {
                 savePort.saveData(appData);
             } else {
-                throw new DeleteTaskException("Task could not be deleted, because this task is not in this project");
+                throw new CannotDeleteTaskException("Task could not be deleted, because this task is not in this project");
             }
 
         } else {
 
-            throw new DeleteTaskException("Project not found!");
+            throw new CannotDeleteTaskException("Project not found!");
 
         }
     }
@@ -42,12 +45,12 @@ public class DeleteTaskService implements DeleteTaskUseCase {
             if (isDeleted) {
                 savePort.saveData(appData);
             } else {
-                throw new DeleteTaskException("Task could not be deleted, because this task is not in this context-list of this User");
+                throw new CannotDeleteTaskException("Task could not be deleted, because this task is not in this context-list of this User");
             }
 
         } else {
 
-            throw new DeleteTaskException("User not found!");
+            throw new CannotDeleteTaskException("User not found!");
 
         }
     }
