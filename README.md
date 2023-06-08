@@ -9,15 +9,15 @@ This repository contains a student project created for an ongoing lecture on obj
 
 | Number | Feature                  | Implemented   | Tested        |
 |--------|--------------------------|:-------------:|:-------------:|
-| 1      | create/delete Project    | [ ]         | [ ]         |
+| 1      | create/delete Project    | [x]         | [x]         |
 | 2      | rename Project           | [ ]         | [ ]         |
 | 3      | add/remove Task          | [ ]         | [ ]         |
 | 4      | merge Project            | [ ]         | [ ]         |
 | 5      | Project Modifier Access  | [ ]         | [ ]         |
 | 6      | create/delete Task       | [ ]         | [ ]         |
 | 7      | modify Task Attributes   | [ ]         | [ ]         |
-| 8      | edit Task State          | [ ]         | [ ]         |
-| 9      | create Kontextliste      | [ ]         | [ ]         |
+| 8      | edit Task State          | [x]         | [x]         |
+| 9      | create Kontextliste      | [x]         | [x]         |
 
 ## Optional Features
 
