@@ -1,4 +1,4 @@
-package hwr.oop.UserInterface;
+package hwr.oop.userinterface;
 
 
 //        try {
