@@ -23,19 +23,15 @@ public class Login {
     }
 
     public void start() {
-        while (true) {
-            out.println("What do you wanna do??????");
-            out.println("Type 1 to login");
-            out.println("Type 2 to register a new user");
-            String choice = input.nextLine();
+        out.println("What do you wanna do??????");
+        out.println("Type 1 to login");
+        out.println("Type 2 to register a new user");
+        String choice = input.nextLine();
 
-            if (choice.equals("1")) {
-                loginLogin();
-                break;
-            } else if (choice.equals("2")) {
-                registerUser();
-                break;
-            }
+        if (choice.equals("1")) {
+            loginLogin();
+        } else if (choice.equals("2")) {
+            registerUser();
         }
 
     }
@@ -53,7 +49,8 @@ public class Login {
             start();
         }
     }
-    public void registerUser(){
+
+    public void registerUser() {
         out.println("Enter username for new user: \n");
 
     }
