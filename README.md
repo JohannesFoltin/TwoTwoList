@@ -9,15 +9,15 @@ This repository contains a student project created for an ongoing lecture on obj
 
 | Number | Feature                  | Implemented   | Tested        |
 |--------|--------------------------|:-------------:|:-------------:|
-| 1      | create/delete Project    | - [ ]         | - [ ]         |
-| 2      | rename Project           | - [ ]         | - [ ]         |
-| 3      | add/remove Task          | - [ ]         | - [ ]         |
-| 4      | merge Project            | - [ ]         | - [ ]         |
-| 5      | Project Modifier Access  | - [ ]         | - [ ]         |
-| 6      | create/delete Task       | - [ ]         | - [ ]         |
-| 7      | modify Task Attributes   | - [ ]         | - [ ]         |
-| 8      | edit Task State          | - [ ]         | - [ ]         |
-| 9      | create Kontextliste      | - [ ]         | - [ ]         |
+| 1      | create/delete Project    | <input type="checkbox" />         | <input type="checkbox" />         |
+| 2      | rename Project           | <input type="checkbox" />         | <input type="checkbox" />         |
+| 3      | add/remove Task          | <input type="checkbox" />         | <input type="checkbox" />         |
+| 4      | merge Project            | <input type="checkbox" />         | <input type="checkbox" />         |
+| 5      | Project Modifier Access  | <input type="checkbox" />         | <input type="checkbox" />         |
+| 6      | create/delete Task       | <input type="checkbox" />         | <input type="checkbox" />         |
+| 7      | modify Task Attributes   | <input type="checkbox" />         | <input type="checkbox" />         |
+| 8      | edit Task State          | <input type="checkbox" />         | <input type="checkbox" />         |
+| 9      | create Kontextliste      | <input type="checkbox" />         | <input type="checkbox" />         |
 
 ## Optional Features
 
@@ -26,11 +26,11 @@ This repository contains a student project created for an ongoing lecture on obj
 
 | Number | Optional Feature         | Implemented   | Tested        |
 |--------|--------------------------|:-------------:|:-------------:|
-| 1      | send Notifications       | - [ ]         | - [ ]         |
-| 2      | create a simple Tutorial | - [ ]         | - [ ]         |
-| 3      | add Tableflip option     | - [ ]         | - [ ]         |
-| 4      | set Project as done      | - [ ]         | - [ ]         |
-| 5      | clear Kontextliste weekly| - [ ]         | - [ ]         |
+| 1      | send Notifications       | <input type="checkbox" />         | <input type="checkbox" />         |
+| 2      | create a simple Tutorial | <input type="checkbox" />         | <input type="checkbox" />         |
+| 3      | add Tableflip option     | <input type="checkbox" />         | <input type="checkbox" />         |
+| 4      | set Project as done      | <input type="checkbox" />         | <input type="checkbox" />         |
+| 5      | clear Kontextliste weekly| <input type="checkbox" />         | <input type="checkbox" />         |
 
 ## Additional Dependencies
 
