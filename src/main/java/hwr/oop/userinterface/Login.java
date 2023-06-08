@@ -1,4 +1,4 @@
-package hwr.oop.UserInterface;
+package hwr.oop.userinterface;
 
 import hwr.oop.application.ValidateUserService;
 import hwr.oop.application.ValidateUserUseCase;
@@ -54,6 +54,7 @@ public class Login {
         }
     }
     public void registerUser(){
+        out.println("Enter username for new user: \n");
 
     }
 }
