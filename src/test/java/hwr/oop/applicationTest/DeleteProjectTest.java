@@ -4,7 +4,7 @@ import hwr.oop.application.CantDeleteNonexistentProjectException;
 import hwr.oop.application.DeleteProjectService;
 import hwr.oop.application.DeleteProjectUseCase;
 import hwr.oop.application.Project;
-import hwr.oop.persistence.AppData;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.PersistenceAdapter;
 import hwr.oop.persistence.SavePort;

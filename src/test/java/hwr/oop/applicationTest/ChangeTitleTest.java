@@ -1,7 +1,7 @@
 package hwr.oop.applicationTest;
 
 import hwr.oop.application.*;
-import hwr.oop.persistence.AppData;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 
 
-public class ChangeTitleTest {
+ class ChangeTitleTest {
 
     private LoadPort loadPort;
     private SavePort savePort;
