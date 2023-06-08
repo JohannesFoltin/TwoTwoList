@@ -29,12 +29,7 @@ public class Project {
         return permissions;
     }
     public void changePermission(User user, Boolean permission){
-        if(permissions.containsKey(user)) {
-            permissions.put(user, !permissions.get(user));
-        }
-        else{
             permissions.put(user, permission);
-        }
     }
     public void removePermissionUser(User user){
         if(permissions.containsKey(user)) {
