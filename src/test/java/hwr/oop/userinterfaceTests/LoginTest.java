@@ -13,7 +13,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,12 +25,7 @@ class LoginTest {
     void setUp(){
         appDataMock = new AppData(new ArrayList<>(),new ArrayList<>());
         mainMenu = new MyMainMenu();
-        loadPort = new LoadPort() {
-            @Override
-            public AppData loadData() {
-                return appDataMock;
-            }
-        };
+        loadPort = () -> appDataMock;
     }
     @Test
     void startTest(){
@@ -44,7 +38,7 @@ class LoginTest {
 
         login.start();
 
-        String output = retrieveResultFrom(outputStream); // This is how you can get the result output (sadly the complete, not the last line!)
+        //String output = retrieveResultFrom(outputStream); This is how you can get the result output (sadly the complete, not the last line!)
         assertThat(mainMenu.isCalled()).isTrue();
     }
 
