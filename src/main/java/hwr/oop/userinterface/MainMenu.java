@@ -4,8 +4,8 @@ import hwr.oop.application.User;
 
 public class MainMenu {
 
-    void start(User user){
-
+    public void start(User user){
         return;
     }
+
 }

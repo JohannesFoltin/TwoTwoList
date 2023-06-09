@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LoginTest {
     private LoadPort loadPort;
     AppData appDataMock;
-    private MainMenu mainMenu;
+    private MyMainMenu mainMenu;
     @BeforeEach
     void setUp(){
         appDataMock = new AppData(new ArrayList<>(),new ArrayList<>());
@@ -45,8 +45,8 @@ class LoginTest {
 
         login.start();
 
-        String output = retrieveResultFrom(outputStream);
-        assertThat(mainMenu.)
+        String output = retrieveResultFrom(outputStream); // This is how you can get the result output (sadly the complete, not the last line!
+        assertThat(mainMenu.isCalled()).isTrue();
     }
 
     private String retrieveResultFrom(OutputStream outputStream) {
@@ -66,8 +66,8 @@ class LoginTest {
         }
 
         private boolean isCalled = false;
-
-        void start(User user){
+        @Override
+        public void start(User user){
             isCalled = true;
         }
     }
