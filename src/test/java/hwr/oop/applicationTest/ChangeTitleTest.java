@@ -18,7 +18,7 @@ import java.util.UUID;
 public class ChangeTitleTest {
 
     private LoadPort loadPort;
-    private SavePort savePort;
+    private MySavePort savePort;
     private ChangeTitleService changeTitleService;
     AppData appDataMock;
     @BeforeEach
@@ -35,19 +35,35 @@ public class ChangeTitleTest {
         appDataMock = new AppData(projects,users);
 
         loadPort = () -> appDataMock;
-        savePort = appData -> appDataMock = appData;
+        savePort = new MySavePort();
 
         changeTitleService = new ChangeTitleService(loadPort, savePort);
     }
+    private class MySavePort implements SavePort {
+        private boolean flag = false;
+
+        public boolean isFlag() {
+            return flag;
+        }
+
+        @Override
+        public void saveData(AppData appData) {
+            this.flag = true;
+            appDataMock = appData;
+        }
+    }
+
     @Test
-    void changeTitleSuccesfully(){
+    void changeTitleSuccessfully(){
         Project project= loadPort.loadData().getProjectList().get(0);
         assertThat(loadPort.loadData().getProjectList().get(0).getTitle()).isEqualTo("Test Project");
         changeTitleService.changeTitle(project,"Title");
         assertThat(loadPort.loadData().getProjectList().get(0).getTitle()).isEqualTo("Title");
+        assertThat(savePort.isFlag()).isTrue();
+
     }
     @Test
-    void changeTitleUnsuccesfully(){
+    void changeTitleUnsuccessfully(){
         Project project= new Project(UUID.randomUUID(),null, "Title",null);
         try {
             changeTitleService.changeTitle(project, "NewTitle");
