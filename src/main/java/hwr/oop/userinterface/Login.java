@@ -1,5 +1,6 @@
 package hwr.oop.userinterface;
 
+import hwr.oop.application.User;
 import hwr.oop.application.ValidateUserService;
 import hwr.oop.application.ValidateUserUseCase;
 import hwr.oop.persistence.LoadPort;
@@ -43,13 +44,16 @@ public class Login {
         String name = input.nextLine();
 
         ValidateUserUseCase validateUserUseCase = new ValidateUserService(loadPort);
-
+        User user;
         try {
-            mainMenu.start(validateUserUseCase.validateUser(name));
+            user = validateUserUseCase.validateUser(name);
+            mainMenu.start(user);
         } catch (UserNotInAppDataException e) {
             out.println("Username not found");
-            //start();
+            start();
         }
+
+
     }
 
     public void registerUser() {
