@@ -28,8 +28,21 @@ class LoginTest {
         loadPort = () -> appDataMock;
     }
     @Test
-    void startTest(){
+    void startTestToMainMenu(){
         appDataMock.getUserList().add(new User(UUID.randomUUID(),"Test",null,null));
+
+        InputStream inputStream = createInputStreamForInput("1\nTest\n");
+        OutputStream outputStream = new ByteArrayOutputStream();
+
+        Login login = new Login(inputStream,outputStream,mainMenu,loadPort);
+
+        login.start();
+
+        //String output = retrieveResultFrom(outputStream); This is how you can get the result output (sadly the complete, not the last line!)
+        assertThat(mainMenu.isCalled()).isTrue();
+    }
+    @Test
+    void startTestToMainMenu_Exception(){
 
         InputStream inputStream = createInputStreamForInput("1\nTest\n");
         OutputStream outputStream = new ByteArrayOutputStream();
