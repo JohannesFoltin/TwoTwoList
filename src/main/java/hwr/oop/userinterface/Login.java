@@ -16,13 +16,13 @@ public class Login {
     private final PrintStream out;
 
     private final MainMenu mainMenu;
-    private final LoadPort loadPort;
+    private final ValidateUserUseCase validateUserUseCase;
 
-    public Login(InputStream input, OutputStream out, MainMenu mainMenu, LoadPort loadPort) {
+    public Login(InputStream input, OutputStream out, MainMenu mainMenu, ValidateUserUseCase validateUserUseCase) {
         this.input = new Scanner(input);
         this.out = new PrintStream(out);
         this.mainMenu = mainMenu;
-        this.loadPort = loadPort;
+        this.validateUserUseCase = validateUserUseCase;
     }
 
     public void start() {
@@ -43,7 +43,6 @@ public class Login {
         out.println("Enter Username: \n");
         String name = input.nextLine();
 
-        ValidateUserUseCase validateUserUseCase = new ValidateUserService(loadPort);
         User user;
         try {
             user = validateUserUseCase.validateUser(name);
@@ -52,8 +51,6 @@ public class Login {
             out.println("Username not found");
             start();
         }
-
-
     }
 
     public void registerUser() {

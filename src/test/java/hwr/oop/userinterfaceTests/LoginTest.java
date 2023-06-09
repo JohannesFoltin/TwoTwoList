@@ -1,6 +1,8 @@
 package hwr.oop.userinterfaceTests;
 
 import hwr.oop.application.User;
+import hwr.oop.application.ValidateUserService;
+import hwr.oop.application.ValidateUserUseCase;
 import hwr.oop.persistence.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.userinterface.Login;
@@ -21,11 +23,14 @@ class LoginTest {
     private LoadPort loadPort;
     AppData appDataMock;
     private MyMainMenu mainMenu;
+    private ValidateUserUseCase validateUserUseCase;
     @BeforeEach
     void setUp(){
         appDataMock = new AppData(new ArrayList<>(),new ArrayList<>());
         mainMenu = new MyMainMenu();
         loadPort = () -> appDataMock;
+
+        validateUserUseCase = new ValidateUserService(loadPort);
     }
     @Test
     void startTestToMainMenu(){
@@ -34,7 +39,7 @@ class LoginTest {
         InputStream inputStream = createInputStreamForInput("1\nTest\n");
         OutputStream outputStream = new ByteArrayOutputStream();
 
-        Login login = new Login(inputStream,outputStream,mainMenu,loadPort);
+        Login login = new Login(inputStream,outputStream,mainMenu, validateUserUseCase);
 
         login.start();
 
@@ -47,7 +52,7 @@ class LoginTest {
         InputStream inputStream = createInputStreamForInput("1\nTest\n");
         OutputStream outputStream = new ByteArrayOutputStream();
 
-        Login login = new Login(inputStream,outputStream,mainMenu,loadPort);
+        Login login = new Login(inputStream,outputStream,mainMenu,validateUserUseCase);
 
         login.start();
 
