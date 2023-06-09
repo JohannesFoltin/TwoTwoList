@@ -1,9 +1,7 @@
 package hwr.oop.userinterface;
 
 import hwr.oop.application.User;
-import hwr.oop.application.ValidateUserService;
 import hwr.oop.application.ValidateUserUseCase;
-import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.UserNotInAppDataException;
 
 import java.io.InputStream;

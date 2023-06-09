@@ -20,7 +20,6 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LoginTest {
-    private LoadPort loadPort;
     AppData appDataMock;
     private MyMainMenu mainMenu;
     private ValidateUserUseCase validateUserUseCase;
@@ -28,7 +27,7 @@ class LoginTest {
     void setUp(){
         appDataMock = new AppData(new ArrayList<>(),new ArrayList<>());
         mainMenu = new MyMainMenu();
-        loadPort = () -> appDataMock;
+        LoadPort loadPort = () -> appDataMock;
 
         validateUserUseCase = new ValidateUserService(loadPort);
     }
@@ -43,21 +42,39 @@ class LoginTest {
 
         login.start();
 
-        //String output = retrieveResultFrom(outputStream); This is how you can get the result output (sadly the complete, not the last line!)
+        String output = retrieveResultFrom(outputStream); //This is how you can get the result output (sadly the complete, not the last line!)
         assertThat(mainMenu.isCalled()).isTrue();
+        assertThat(output).isEqualTo("o you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:");
+
     }
     @Test
     void startTestToMainMenu_Exception(){
 
-        InputStream inputStream = createInputStreamForInput("1\nTest\n");
+        appDataMock.getUserList().add(new User(UUID.randomUUID(),"Test",null,null));
+
+        InputStream inputStream = createInputStreamForInput("1\ntest\n1\nTest");
         OutputStream outputStream = new ByteArrayOutputStream();
 
         Login login = new Login(inputStream,outputStream,mainMenu,validateUserUseCase);
 
         login.start();
 
-        //String output = retrieveResultFrom(outputStream); This is how you can get the result output (sadly the complete, not the last line!)
+        String output = retrieveResultFrom(outputStream); //This is how you can get the result output (sadly the complete, not the last line!)
         assertThat(mainMenu.isCalled()).isTrue();
+        assertThat(output).isEqualTo("o you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username: \n" +
+                "\n" +
+                "Username not found\n" +
+                "What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:");
+
     }
 
     private String retrieveResultFrom(OutputStream outputStream) {
