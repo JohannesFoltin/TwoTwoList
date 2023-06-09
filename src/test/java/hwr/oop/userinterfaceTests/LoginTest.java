@@ -3,7 +3,6 @@ package hwr.oop.userinterfaceTests;
 import hwr.oop.application.User;
 import hwr.oop.persistence.AppData;
 import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.PersistenceAdapter;
 import hwr.oop.userinterface.Login;
 import hwr.oop.userinterface.MainMenu;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +44,7 @@ class LoginTest {
 
         login.start();
 
-        String output = retrieveResultFrom(outputStream); // This is how you can get the result output (sadly the complete, not the last line!
+        String output = retrieveResultFrom(outputStream); // This is how you can get the result output (sadly the complete, not the last line!)
         assertThat(mainMenu.isCalled()).isTrue();
     }
 
@@ -60,7 +59,7 @@ class LoginTest {
         return new ByteArrayInputStream(inputInBytes);
     }
 
-    private class MyMainMenu extends MainMenu {
+    private static class MyMainMenu extends MainMenu {
         public boolean isCalled() {
             return isCalled;
         }
