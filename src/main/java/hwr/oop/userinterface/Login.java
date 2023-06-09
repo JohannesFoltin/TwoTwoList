@@ -48,7 +48,7 @@ public class Login {
             mainMenu.start(validateUserUseCase.validateUser(name));
         } catch (UserNotInAppDataException e) {
             out.println("Username not found");
-            start();
+            //start();
         }
     }
 
