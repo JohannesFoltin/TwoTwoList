@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class Login {
     private final Scanner input;
     private final PrintStream out;
-
     private final MainMenu mainMenu;
     private final ValidateUserUseCase validateUserUseCase;
 
@@ -38,7 +37,7 @@ public class Login {
     }
 
     public void loginLogin() {
-        out.println("Enter Username: \n");
+        out.println("Enter Username:\n");
         String name = input.nextLine();
 
         User user;
@@ -52,7 +51,7 @@ public class Login {
     }
 
     public void registerUser() {
-        out.println("Enter username for new user: \n");
+        out.println("Enter username for new user:\n");
 
     }
 }
