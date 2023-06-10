@@ -4,6 +4,8 @@ import hwr.oop.application.DeleteProjectUseCase;
 import hwr.oop.application.ListProjectsOfUserUseCase;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
@@ -17,11 +19,11 @@ public class ProjectMenu {
     private final EditProjectMenu editProjectMenu;
     private final CreateProjectMenu createProjectMenu;
 
-    public ProjectMenu(Scanner input, PrintStream output, ListProjectsOfUserUseCase listProjectsOfUserUseCase,
+    public ProjectMenu(InputStream input, OutputStream output, ListProjectsOfUserUseCase listProjectsOfUserUseCase,
                        DeleteProjectUseCase deleteProjectUseCase, EditProjectMenu editProjectMenu,
                        CreateProjectMenu createProjectMenu) {
-        this.input = input;
-        this.output = output;
+        this.input = new Scanner(input);
+        this.output = new PrintStream(output);
         this.listProjectsOfUserUseCase = listProjectsOfUserUseCase;
         this.deleteProjectUseCase = deleteProjectUseCase;
         this.editProjectMenu = editProjectMenu;
