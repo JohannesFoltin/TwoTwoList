@@ -42,7 +42,7 @@ public class CreateProjectMenu {
         String title = input.nextLine();
         if (title.isEmpty() || title.isBlank()) {
             output.println("Input invalid, please try again. \n");
-            start(user);
+            start(user, task);
         } else {
             createProjectUseCase.createProject(title, List.of(task), user);
             projectMenu.start(user);
