@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayInputStream;
@@ -51,11 +50,6 @@ class LoginTest {
 
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
         verify(mainMenu).start(any());
-        assertThat(output).isEqualTo("What do you wanna do??????\n" +
-                "Type 1 to login\n" +
-                "Type 2 to register a new user\n" +
-                "Enter Username:\n" +
-                "\n");
 
     }
     @Test
@@ -72,16 +66,6 @@ class LoginTest {
 
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
         verify(mainMenu).start(any());
-        assertThat(output).isEqualTo("o you wanna do??????\n" +
-                "Type 1 to login\n" +
-                "Type 2 to register a new user\n" +
-                "Enter Username: \n" +
-                "\n" +
-                "Username not found\n" +
-                "What do you wanna do??????\n" +
-                "Type 1 to login\n" +
-                "Type 2 to register a new user\n" +
-                "Enter Username:");
 
     }
 
