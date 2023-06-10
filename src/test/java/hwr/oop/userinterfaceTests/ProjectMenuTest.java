@@ -65,8 +65,27 @@ class ProjectMenuTest {
 
         projectMenu.listProjects(projects);
         assertThat(outputStream.toString()).isEqualTo(
-                "1: 41340433-7709-40d8-99c5-c576309f690a - testProject0\n" +
-                "2: 92d064a9-2ae6-420b-b426-a4a899bc6e1a - testProject1\n" +
-                "3: 0dc02f14-1434-405b-b110-04aae925b85b - testProject2\n");
+                "These are your projects: \n" +
+                        "\n" +
+                        "1: 41340433-7709-40d8-99c5-c576309f690a - testProject0\n" +
+                        "2: 92d064a9-2ae6-420b-b426-a4a899bc6e1a - testProject1\n" +
+                        "3: 0dc02f14-1434-405b-b110-04aae925b85b - testProject2\n");
+    }
+
+    @Test
+    void chooseProjectSuccessfullyTest() {
+        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n"), outputStream,
+                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+
+        assertThat(projectMenu.chooseProject(projects)).isEqualTo(projects.get(1));
+        assertThat(outputStream.toString()).hasToString("Which project? (1 - 3) \n" + "\n");
+    }
+
+    @Test
+    void chooseProjectUnsuccessfullyTest() {
+        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("8\n"), outputStream,
+                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+        projectMenu.chooseProject(projects);
+        assertThat(outputStream.toString()).hasToString("toast");
     }
 }

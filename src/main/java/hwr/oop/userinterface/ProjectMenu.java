@@ -31,7 +31,6 @@ public class ProjectMenu {
     }
 
     public void start(User user) {
-        output.println("These are your projects: \n");
         List<Project> projects = listProjectsOfUserUseCase.listProjects(user);
         listProjects(projects);
 
@@ -54,6 +53,7 @@ public class ProjectMenu {
     }
 
     public void listProjects(List<Project> projects) {
+        output.println("These are your projects: \n");
         for (int i = 0; i < projects.size(); i++) {
             output.println(i+1 + ": " + projects.get(i).toString());
         }
@@ -69,7 +69,7 @@ public class ProjectMenu {
         return projects.get(Integer.parseInt(choice)-1);
     }
 
-    private void deleteProject(List<Project> projects, User user) {
+    public void deleteProject(List<Project> projects, User user) {
         Project toBeDeleted = chooseProject(projects);
         if (toBeDeleted.getPermissions().get(user).equals(Boolean.FALSE)) {
             output.println("You do not have the necessary permissions to delete this Project. \n");
@@ -78,7 +78,7 @@ public class ProjectMenu {
         deleteProjectUseCase.deleteProject(toBeDeleted);
     }
 
-    void editProject(List<Project> projects, User user) {
+    public void editProject(List<Project> projects, User user) {
         Project toBeEdited = chooseProject(projects);
         if (toBeEdited.getPermissions().get(user).equals(Boolean.FALSE)) {
             output.println("You do not have the necessary permissions to edit this Project. \n");
@@ -87,7 +87,7 @@ public class ProjectMenu {
         editProjectMenu.start();
     }
 
-    private void createProject(User user) {
+    public void createProject(User user) {
         createProjectMenu.start();
     }
 }
