@@ -64,18 +64,21 @@ public class ProjectMenu {
         String choice = input.nextLine();
         if (Integer.parseInt(choice) <= 1 || Integer.parseInt(choice) >= projects.size()) {
             output.println("Invalid Choice. \n");
-            chooseProject(projects);
+            return chooseProject(projects);
+        } else {
+            return projects.get(Integer.parseInt(choice) - 1);
         }
-        return projects.get(Integer.parseInt(choice)-1);
     }
 
     public void deleteProject(List<Project> projects, User user) {
         Project toBeDeleted = chooseProject(projects);
-        if (toBeDeleted.getPermissions().get(user).equals(Boolean.FALSE)) {
+        if (!toBeDeleted.getPermissions().containsKey(user) ||
+                toBeDeleted.getPermissions().get(user).equals(Boolean.FALSE)) {
             output.println("You do not have the necessary permissions to delete this Project. \n");
             start(user);
+        } else {
+            deleteProjectUseCase.deleteProject(toBeDeleted);
         }
-        deleteProjectUseCase.deleteProject(toBeDeleted);
     }
 
     public void editProject(List<Project> projects, User user) {

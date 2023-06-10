@@ -4,6 +4,7 @@ import hwr.oop.application.DeleteProjectUseCase;
 import hwr.oop.application.ListProjectsOfUserUseCase;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;
+import hwr.oop.applicationTest.RandomTestData;
 import hwr.oop.persistence.AppData;
 import hwr.oop.userinterface.CreateProjectMenu;
 import hwr.oop.userinterface.EditProjectMenu;
@@ -24,7 +25,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProjectMenuTest {
@@ -37,13 +39,14 @@ class ProjectMenuTest {
     @Mock
     CreateProjectMenu createProjectMenu;
     OutputStream outputStream;
+    User user;
     List<Project> projects;
 
     @BeforeEach
     void setUp() {
         outputStream = new ByteArrayOutputStream();
 
-        User user = new User(UUID.randomUUID(), "testUser", null, null);
+        user = new User(UUID.randomUUID(), "testUser", null, null);
         projects = new ArrayList<>();
         UUID id0 = UUID.fromString("41340433-7709-40d8-99c5-c576309f690a");
         projects.add(new Project(id0, null, "testProject0", Map.of(user, Boolean.TRUE)));
@@ -83,9 +86,32 @@ class ProjectMenuTest {
 
     @Test
     void chooseProjectUnsuccessfullyTest() {
-        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("8\n"), outputStream,
+        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("8\n2\n"), outputStream,
                 listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
         projectMenu.chooseProject(projects);
-        assertThat(outputStream.toString()).hasToString("toast");
+        assertThat(outputStream.toString()).hasToString("Which project? (1 - 3) \n" +
+                "\n" +
+                "Invalid Choice. \n" +
+                "\n" +
+                "Which project? (1 - 3) \n" +
+                "\n");
+    }
+
+    @Test
+    void deleteProjectWithPermissionsTest() {
+        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n"), outputStream,
+                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+
+        projectMenu.deleteProject(projects, user);
+        verify(deleteProjectUseCase).deleteProject(any());
+    }
+
+    @Test
+    void deleteProjectWithoutPermission() {
+        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n2\n"), outputStream,
+                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+
+        projectMenu.deleteProject(projects, RandomTestData.getRandomUser());
+        verify(deleteProjectUseCase, never()).deleteProject(any());
     }
 }
