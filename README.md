@@ -7,17 +7,17 @@ This repository contains a student project created for an ongoing lecture on obj
 
 [TODO]: # (For each feature implemented, add a row to the table!)
 
-| Number | Feature                  | Implemented   | Tested        |
-|--------|--------------------------|:-------------:|:-------------:|
-| 1      | create/delete Project    | - [ ]         | - [ ]         |
-| 2      | rename Project           | - [ ]         | - [ ]         |
-| 3      | add/remove Task          | - [ ]         | - [ ]         |
-| 4      | merge Project            | - [ ]         | - [ ]         |
-| 5      | Project Modifier Access  | - [ ]         | - [ ]         |
-| 6      | create/delete Task       | - [ ]         | - [ ]         |
-| 7      | modify Task Attributes   | - [ ]         | - [ ]         |
-| 8      | edit Task State          | - [ ]         | - [ ]         |
-| 9      | create Kontextliste      | - [ ]         | - [ ]         |
+| Number | Feature                  | Implemented | Tested |
+|--------|--------------------------|:-----------:|:------:|
+| 1      | create/delete Project    |    - [ ]    | - [ ]  |
+| 2      | rename Project           |    - [ ]    | - [ ]  |
+| 3      | add/remove Task          |    - [x]    | - [x]  |
+| 4      | merge Project            |    - [ ]    | - [ ]  |
+| 5      | Project Modifier Access  |    - [ ]    | - [ ]  |
+| 6      | create/delete Task       |    - [ ]    | - [ ]  |
+| 7      | modify Task Attributes   |    - [ ]    | - [ ]  |
+| 8      | edit Task State          |    - [ ]    | - [ ]  |
+| 9      | create Kontextliste      |    - [ ]    | - [ ]  |
 
 
 
