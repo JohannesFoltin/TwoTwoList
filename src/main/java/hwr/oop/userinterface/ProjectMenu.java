@@ -13,15 +13,17 @@ public class ProjectMenu {
     private final Scanner input;
     private final PrintStream output;
     private final ListProjectsOfUserUseCase listProjectsOfUserUseCase;
-    private final DeleteProjectUseCase deleteProject;
+    private final DeleteProjectUseCase deleteProjectUseCase;
     private final EditProjectMenu editProjectMenu;
     private final CreateProjectMenu createProjectMenu;
 
-    public ProjectMenu(Scanner input, PrintStream output, ListProjectsOfUserUseCase listProjectsOfUserUseCase, DeleteProjectUseCase deleteProject, EditProjectMenu editProjectMenu, CreateProjectMenu createProjectMenu) {
+    public ProjectMenu(Scanner input, PrintStream output, ListProjectsOfUserUseCase listProjectsOfUserUseCase,
+                       DeleteProjectUseCase deleteProjectUseCase, EditProjectMenu editProjectMenu,
+                       CreateProjectMenu createProjectMenu) {
         this.input = input;
         this.output = output;
         this.listProjectsOfUserUseCase = listProjectsOfUserUseCase;
-        this.deleteProject = deleteProject;
+        this.deleteProjectUseCase = deleteProjectUseCase;
         this.editProjectMenu = editProjectMenu;
         this.createProjectMenu = createProjectMenu;
     }
@@ -29,9 +31,7 @@ public class ProjectMenu {
     public void start(User user) {
         output.println("These are your projects: \n");
         List<Project> projects = listProjectsOfUserUseCase.listProjects(user);
-        for (int i = 0; i < projects.size(); i++) {
-            output.println(i+1 + ": " + projects.get(i).toString() + "\n");
-        }
+        listProjects(projects);
 
         output.println("What do you want to do? \n");
         output.println("Type 1 to edit a Project \n");
@@ -51,7 +51,13 @@ public class ProjectMenu {
         }
     }
 
-    private Project chooseProject(List<Project> projects) {
+    public void listProjects(List<Project> projects) {
+        for (int i = 0; i < projects.size(); i++) {
+            output.println(i+1 + ": " + projects.get(i).toString() + "\n");
+        }
+    }
+
+    public Project chooseProject(List<Project> projects) {
         output.println("Which project? (1 - " + projects.size() + ") \n");
         String choice = input.nextLine();
         if (Integer.parseInt(choice) <= 1 || Integer.parseInt(choice) >= projects.size()) {
@@ -67,7 +73,7 @@ public class ProjectMenu {
             output.println("You do not have the necessary permissions to delete this Project. \n");
             start(user);
         }
-        deleteProject.deleteProject(toBeDeleted);
+        deleteProjectUseCase.deleteProject(toBeDeleted);
     }
 
     void editProject(List<Project> projects, User user) {
