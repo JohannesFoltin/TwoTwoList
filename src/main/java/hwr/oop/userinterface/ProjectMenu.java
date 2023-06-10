@@ -3,7 +3,7 @@ package hwr.oop.userinterface;
 import hwr.oop.application.DeleteProjectUseCase;
 import hwr.oop.application.ListProjectsOfUserUseCase;
 import hwr.oop.application.Project;
-import hwr.oop.application.User;;
+import hwr.oop.application.User;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -43,7 +43,7 @@ public class ProjectMenu {
         if (choice.equals("1")) {
             editProject(projects, user);
         } else if (choice.equals("2")) {
-            createProject(user);
+            createProject();
         } else if (choice.equals("3")) {
             deleteProject(projects, user);
         } else {
@@ -62,7 +62,7 @@ public class ProjectMenu {
     public Project chooseProject(List<Project> projects) {
         output.println("Which project? (1 - " + projects.size() + ") \n");
         String choice = input.nextLine();
-        if (Integer.parseInt(choice) <= 1 || Integer.parseInt(choice) >= projects.size()) {
+        if (Integer.parseInt(choice) < 1 || Integer.parseInt(choice) > projects.size()) {
             output.println("Invalid Choice. \n");
             return chooseProject(projects);
         } else {
@@ -83,14 +83,16 @@ public class ProjectMenu {
 
     public void editProject(List<Project> projects, User user) {
         Project toBeEdited = chooseProject(projects);
-        if (toBeEdited.getPermissions().get(user).equals(Boolean.FALSE)) {
+        if (!toBeEdited.getPermissions().containsKey(user) ||
+                toBeEdited.getPermissions().get(user).equals(Boolean.FALSE)) {
             output.println("You do not have the necessary permissions to edit this Project. \n");
             start(user);
+        } else {
+            editProjectMenu.start();
         }
-        editProjectMenu.start();
     }
 
-    public void createProject(User user) {
+    public void createProject() {
         createProjectMenu.start();
     }
 }
