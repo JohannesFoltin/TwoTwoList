@@ -1,5 +1,6 @@
 package hwr.oop.userinterface;
 
+import hwr.oop.application.DeleteProjectUseCase;
 import hwr.oop.application.ListProjectsOfUserUseCase;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;;
@@ -12,11 +13,17 @@ public class ProjectMenu {
     private final Scanner input;
     private final PrintStream output;
     private final ListProjectsOfUserUseCase listProjectsOfUserUseCase;
+    private final DeleteProjectUseCase deleteProject;
+    private final EditProjectMenu editProjectMenu;
+    private final CreateProjectMenu createProjectMenu;
 
-    public ProjectMenu(Scanner input, PrintStream output, ListProjectsOfUserUseCase listProjectsOfUserUseCase) {
+    public ProjectMenu(Scanner input, PrintStream output, ListProjectsOfUserUseCase listProjectsOfUserUseCase, DeleteProjectUseCase deleteProject, EditProjectMenu editProjectMenu, CreateProjectMenu createProjectMenu) {
         this.input = input;
         this.output = output;
         this.listProjectsOfUserUseCase = listProjectsOfUserUseCase;
+        this.deleteProject = deleteProject;
+        this.editProjectMenu = editProjectMenu;
+        this.createProjectMenu = createProjectMenu;
     }
 
     public void start(User user) {
@@ -32,12 +39,12 @@ public class ProjectMenu {
         output.println("Type 3 to delete a Project \n");
         String choice = input.nextLine();
 
-        if (choice == "1") {
-            editProject(user);
-        } else if (choice == "2") {
+        if (choice.equals("1")) {
+            editProject(projects, user);
+        } else if (choice.equals("2")) {
             createProject(user);
-        } else if (choice == "3") {
-            deleteProject(projects);
+        } else if (choice.equals("3")) {
+            deleteProject(projects, user);
         } else {
             output.println("Choice invalid. \n");
             start(user);
@@ -54,14 +61,25 @@ public class ProjectMenu {
         return projects.get(Integer.parseInt(choice)-1);
     }
 
-    private void deleteProject(List<Project> projects) {
+    private void deleteProject(List<Project> projects, User user) {
         Project toBeDeleted = chooseProject(projects);
+        if (toBeDeleted.getPermissions().get(user).equals(Boolean.FALSE)) {
+            output.println("You do not have the necessary permissions to delete this Project. \n");
+            start(user);
+        }
+        deleteProject.deleteProject(toBeDeleted);
     }
 
-    void editProject(User user) {
-
+    void editProject(List<Project> projects, User user) {
+        Project toBeEdited = chooseProject(projects);
+        if (toBeEdited.getPermissions().get(user).equals(Boolean.FALSE)) {
+            output.println("You do not have the necessary permissions to edit this Project. \n");
+            start(user);
+        }
+        editProjectMenu.start();
     }
+
     private void createProject(User user) {
-
+        createProjectMenu.start();
     }
 }
