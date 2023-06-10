@@ -43,7 +43,7 @@ public class ProjectMenu {
         if (choice.equals("1")) {
             editProject(projects, user);
         } else if (choice.equals("2")) {
-            createProject();
+            createProject(user);
         } else if (choice.equals("3")) {
             deleteProject(projects, user);
         } else {
@@ -92,7 +92,7 @@ public class ProjectMenu {
         }
     }
 
-    public void createProject() {
-        createProjectMenu.start();
+    public void createProject(User user) {
+        createProjectMenu.start(user);
     }
 }

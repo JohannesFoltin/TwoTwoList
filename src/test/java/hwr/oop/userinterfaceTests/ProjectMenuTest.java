@@ -145,8 +145,8 @@ class ProjectMenuTest {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput(""), outputStream,
                 listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
-        projectMenu.createProject();
-        verify(createProjectMenu).start();
+        projectMenu.createProject(user);
+        verify(createProjectMenu).start(user);
     }
 
     @Test
@@ -246,6 +246,6 @@ class ProjectMenuTest {
                 "\n" +
                 "Type 3 to delete a Project \n" +
                 "\n");
-        verify(createProjectMenu).start();
+        verify(createProjectMenu).start(user);
     }
 }
