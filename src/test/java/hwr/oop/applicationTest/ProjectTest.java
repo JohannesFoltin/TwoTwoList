@@ -195,35 +195,5 @@ class ProjectTest {
             e.printStackTrace();
         }
     }
-    @Test
-    void removeAccessUserSuccesful(){
-        User user = new User(UUID.randomUUID(),"name", null,null);
-        Map <User, Boolean> permissions= new HashMap<>();
-        Project project = new Project(UUID.randomUUID(),null,"title",permissions);
-        project.getPermissions().put(user,true);
-        project.removePermissionUser(user);
-        assertThat(project.getPermissions().containsKey(user)).isEqualTo(false);
-    }
-    @Test
-    void removeAccessUserUnsuccesful(){
-        User user = new User(UUID.randomUUID(),"name", null,null);
-        Map <User, Boolean> permissions= new HashMap<>();
-        Project project = new Project(UUID.randomUUID(),null,"title",permissions);
-        try {
-            project.removePermissionUser(user);
-            fail("user not found");
-        }catch (CanNotFindUserToRemove e){
-            e.printStackTrace();
-        }
-    }
-    @Test
-    void addAccessUser(){
-        User user = new User(UUID.randomUUID(),"name", null,null);
-        Map <User, Boolean> permissions= new HashMap<>();
-        Project project = new Project(UUID.randomUUID(),null,"title",permissions);
-        project.changePermission(user,true);
-        assertThat(project.getPermissions().get(user)).isEqualTo(true);
-        project.changePermission(user,false);
-        assertThat(project.getPermissions().get(user)).isEqualTo(false);
-    }
+
 }

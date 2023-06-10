@@ -6,6 +6,7 @@ import hwr.oop.persistence.SavePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.*;
 
@@ -40,6 +41,32 @@ public class PermissionTest {
         changePermissionService.removePermissionUser(project,user);
         assertThat(savePort.isFlag()).isEqualTo(true);
         assertThat(loadPort.loadData().getProjectList().get(0).getPermissions().containsKey(user)).isFalse();
+    }
+    @Test
+    void RemoveUserUnsuccessfully(){
+        AppData appData= loadPort.loadData();
+        Map<User, Boolean> permissions= new HashMap<>();
+        Project project = new Project(UUID.randomUUID(),null,"Title",permissions);
+        User user = appData.getUserList().get(0);
+        try {
+            changePermissionService.removePermissionUser(project,user);
+            fail("project not found");
+        }catch (CanNotFindProjectForPermissionChange e){
+            e.printStackTrace();
+        }
+    }
+    @Test
+    void ChangePermissionUnsuccessfully(){
+        AppData appData= loadPort.loadData();
+        Map<User, Boolean> permissions= new HashMap<>();
+        Project project = new Project(UUID.randomUUID(),null,"Title",permissions);
+        User user = appData.getUserList().get(0);
+        try {
+            changePermissionService.changePermission(project,user,true);
+            fail("project not found");
+        }catch (CanNotFindProjectForPermissionChange e){
+            e.printStackTrace();
+        }
     }
     @Test
     void ChangePermissionTest(){
