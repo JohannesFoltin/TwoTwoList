@@ -36,7 +36,7 @@ public class Project {
             permissions.remove(user);
         }
         else{
-            throw new PermissionsException("user not found");
+            throw new CanNotFindUserToRemove("user not found");
         }
     }
     private final UUID id;

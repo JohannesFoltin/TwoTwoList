@@ -212,7 +212,7 @@ class ProjectTest {
         try {
             project.removePermissionUser(user);
             fail("user not found");
-        }catch (PermissionsException e){
+        }catch (CanNotFindProjectForPermissionChange e){
             e.printStackTrace();
         }
     }
