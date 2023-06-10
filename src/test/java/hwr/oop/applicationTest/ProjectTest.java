@@ -131,4 +131,12 @@ class ProjectTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void toStringTest() {
+        UUID id = UUID.randomUUID();
+        Project project = new Project(id, null, "testTitle", null);
+
+        assertThat(project.toString()).hasToString(id + " - testTitle");
+    }
 }

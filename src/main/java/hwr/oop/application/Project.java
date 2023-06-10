@@ -54,4 +54,9 @@ public class Project {
     public int hashCode() {
         return Objects.hash(getId(), getTaskList(), getTitle(), getPermissions());
     }
+
+    @Override
+    public String toString() {
+        return id.toString() + " - " + title;
+    }
 }
