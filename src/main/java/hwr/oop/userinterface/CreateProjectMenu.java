@@ -28,24 +28,24 @@ public class CreateProjectMenu {
     public void start(User user) {
         output.println("What do you want to name your new project? \n");
         String title = input.nextLine();
-        try {
-            createProjectUseCase.createProject(title, new ArrayList<>(), user);
-        } catch (Exception e) {
+        if (title.isEmpty() || title.isBlank()) {
             output.println("Input invalid, please try again. \n");
             start(user);
+        } else {
+            createProjectUseCase.createProject(title, new ArrayList<>(), user);
+            projectMenu.start(user);
         }
-        projectMenu.start(user);
     }
 
     public void start(User user, Task task) {
         output.println("What do you want to name your new project? \n");
         String title = input.nextLine();
-        try {
-            createProjectUseCase.createProject(title, List.of(task), user);
-        } catch (Exception e) {
+        if (title.isEmpty() || title.isBlank()) {
             output.println("Input invalid, please try again. \n");
-            start(user, task);
+            start(user);
+        } else {
+            createProjectUseCase.createProject(title, List.of(task), user);
+            projectMenu.start(user);
         }
-        projectMenu.start(user);
     }
 }
