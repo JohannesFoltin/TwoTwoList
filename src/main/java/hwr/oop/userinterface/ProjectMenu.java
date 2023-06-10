@@ -57,7 +57,6 @@ public class ProjectMenu {
         for (int i = 0; i < projects.size(); i++) {
             output.println(i+1 + ": " + projects.get(i).toString());
         }
-        output.println("\n");
     }
 
     public Project chooseProject(List<Project> projects) {
