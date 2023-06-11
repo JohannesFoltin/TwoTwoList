@@ -65,7 +65,7 @@ class EditProjectMenuTest {
 
         editProjectMenu.start(user, project);
 
-        verify(editTaskMenu).start(project, user, project.getTaskList().get(1));
+        verify(editTaskMenu).startWithProject(project.getTaskList().get(1), project);
         assertThat(output.toString()).hasToString("These are all the tasks of Project testTitle: \n" +
                 "\n" +
                 "1 41340433-7709-40d8-99c5-c576309f690a - testTitle0\n" +

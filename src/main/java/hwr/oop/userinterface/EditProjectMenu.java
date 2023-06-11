@@ -43,7 +43,7 @@ public class EditProjectMenu {
 
         if (choice.equals("1")) {
             Task task = chooseTask(project);
-            editTaskMenu.start(project, user, task);
+            editTaskMenu.startWithProject(task, project);
         } else if (choice.equals("2")) {
             addTaskToProjectMenu.start(project, user);
         } else if (choice.equals("3")) {
