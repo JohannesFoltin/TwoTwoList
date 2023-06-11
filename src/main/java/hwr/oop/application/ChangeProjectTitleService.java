@@ -3,11 +3,11 @@ import hwr.oop.persistence.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 
-public class ChangeTitleService implements ChangeTitleUseCase {
+public class ChangeProjectTitleService implements ChangeProjectTitleUseCase {
     private final LoadPort loadPort;
     private final SavePort savePort;
 
-    public ChangeTitleService(LoadPort loadPort, SavePort savePort) {
+    public ChangeProjectTitleService(LoadPort loadPort, SavePort savePort) {
         this.loadPort = loadPort;
         this.savePort = savePort;
     }
