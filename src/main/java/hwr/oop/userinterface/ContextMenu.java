@@ -54,16 +54,16 @@ public class ContextMenu {
         }
     }
     public void createTask(User user){
-        output.println("Please enter a title for your Task");
+        output.println("Please enter a title for your Task\n");
         String title= input.nextLine();
-        output.println("Please enter the content for your Task");
+        output.println("Please enter the content for your Task\n");
         String content= input.nextLine();
         TaskState taskState =taskStateChoice();
         LocalDateTime deadline= deadline();
         createTaskUseCase.createTaskInContextList(title,content, taskState, deadline, user);
     }
     LocalDateTime deadline(){
-        output.println("Please enter a deadline for the Task in the format yyyy-mm-dd HH:MM");
+        output.println("Please enter a deadline for the Task in the format yyyy-mm-dd HH:MM\n");
         String date= input.nextLine();
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -76,7 +76,7 @@ public class ContextMenu {
         output.println("Please enter the state your Task is in");
         output.println("Type 1 if your Task is in backlog");
         output.println("Type 2 if your Task is in progress");
-        output.println("Type 3 if your Task is in review");
+        output.println("Type 3 if your Task is in review\n");
         String choice = input.nextLine();
         if (choice.equals("1")) {
             return TaskState.BACKLOG;
