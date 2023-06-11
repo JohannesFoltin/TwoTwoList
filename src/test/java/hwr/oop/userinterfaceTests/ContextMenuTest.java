@@ -73,6 +73,20 @@ class ContextMenuTest {
         assertThat(appDataMock.getUserList().get(0).getContextList().get(1).getTitle()).isEqualTo("hallo");
 
     }
+    @Test
+    void deleteTaskTest(){
+        Task task= appDataMock.getUserList().get(0).getContextList().get(0);
+        InputStream inputStream = createInputStreamForInput("2\n1\n");
+        OutputStream outputStream = new ByteArrayOutputStream();
+
+        ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
+        User user = appDataMock.getUserList().get(0);
+        contextMenu.start(user);
+
+        String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
+        assertThat(appDataMock.getUserList().get(0).getContextList().contains(task)).isEqualTo(false);
+
+    }
 
 
     private InputStream createInputStreamForInput(String input) {
