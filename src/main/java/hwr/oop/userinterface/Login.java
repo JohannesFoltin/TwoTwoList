@@ -52,7 +52,7 @@ public class Login {
 
     public void registerUser() {
         out.print("Enter username for new user:\n");
-
+        String name = input.nextLine();
 
     }
 }
