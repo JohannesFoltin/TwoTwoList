@@ -2,8 +2,8 @@ package hwr.oop.userinterface;
 
 import hwr.oop.application.CreateUserService;
 import hwr.oop.application.ValidateUserService;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 
 
 public class Cli {
