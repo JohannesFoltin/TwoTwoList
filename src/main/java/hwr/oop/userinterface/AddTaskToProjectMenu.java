@@ -1,11 +1,10 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.AddTaskToProjectUseCase;
-import hwr.oop.application.CreateTaskUseCase;
-import hwr.oop.application.Project;
-import hwr.oop.application.User;
+import hwr.oop.application.*;
 
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class AddTaskToProjectMenu {
@@ -29,29 +28,57 @@ public class AddTaskToProjectMenu {
         String title = input.nextLine();
         output.println("Add content of your new task: \n");
         String content = input.nextLine();
-        output.println("What state should your task have?");
-        output.println("Type 1 to set the taskState to IN_PROGRESS");
-        output.println("Type 2 to set the taskState to BACKLOG0 \n");
-        String choice = input.nextLine();
+
+        TaskState state = chooseTaskState(project);
+        Optional<LocalDateTime> deadline = chooseDeadline(project);
+
+        if (deadline.isEmpty()) {
+            createTask(title, content, state);
+        } else {
+            createTask(title, content, state, deadline.get());
+        }
+    }
+
+    private Optional<LocalDateTime> chooseDeadline(Project project) {
         output.println("Do you want to add a deadline to your task? (y/n) \n");
         String deadlineChoice = input.nextLine();
         if (deadlineChoice.equals("y")) {
             output.println("Please enter deadline: \n");
-            String deadline = input.nextLine();
-            createTask(title, content, choice, deadline);
+            try {
+                return Optional.of(LocalDateTime.parse(input.nextLine()));
+            } catch (Exception e) {
+                output.println("Invalid input, please try again. ");
+                return chooseDeadline(project);
+            }
         } else if (deadlineChoice.equals("n")) {
-            createTask(title, content, choice);
+            return Optional.empty();
         } else {
             output.println("Invalid input, please try again. \n");
-            start(project, user);
+            return chooseDeadline(project);
         }
-
-    }
-    private void createTask(String title, String content, String choice) {
-
     }
 
-    private void createTask(String title, String content, String choice, String deadline) {
+    private TaskState chooseTaskState(Project project) {
+        output.println("What state should your task have?");
+        output.println("Type 1 to set the taskState to IN_PROGRESS");
+        output.println("Type 2 to set the taskState to BACKLOG \n");
+        String choice = input.nextLine();
+        if (choice.equals("1")) {
+            return TaskState.IN_PROGRESS;
+        } else if (choice.equals("2")) {
+            return TaskState.BACKLOG;
+        } else {
+            output.println("Invalid input, please try again. \n");
+            return chooseTaskState(project);
+        }
+    }
+
+
+    private void createTask(String title, String content, TaskState state) {
+
+    }
+
+    private void createTask(String title, String content, TaskState state, LocalDateTime deadline) {
 
     }
 }
