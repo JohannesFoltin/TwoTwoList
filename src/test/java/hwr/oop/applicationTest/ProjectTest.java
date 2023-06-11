@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Stream;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ProjectTest {
@@ -83,6 +83,15 @@ class ProjectTest {
         } catch (ProjectNotInAppDataException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void addTaskTest() {
+        Project project = RandomTestData.getRandomProject();
+        Task task = RandomTestData.getRandomTask();
+
+        project.addTask(task);
+        assertThat(project.getTaskList()).contains(task);
     }
 
     @ParameterizedTest
