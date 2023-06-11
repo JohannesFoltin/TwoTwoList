@@ -15,11 +15,13 @@ public class EditProjectMenu {
     private final EditProjectPermissionsMenu editProjectPermissionsMenu;
     private final DeleteTaskUseCase deleteTaskUseCase;
     private final GetProjectUseCase getProjectUseCase;
+    private final ProjectMenu projectMenu;
 
     public EditProjectMenu(InputStream input, OutputStream output,
                            EditTaskMenu editTaskMenu,
                            AddTaskToProjectMenu addTaskToProjectMenu,
-                           EditProjectPermissionsMenu editProjectPermissionsMenu, DeleteTaskUseCase deleteTaskUseCase, GetProjectUseCase getProjectUseCase) {
+                           EditProjectPermissionsMenu editProjectPermissionsMenu, DeleteTaskUseCase deleteTaskUseCase,
+                           GetProjectUseCase getProjectUseCase, ProjectMenu projectMenu) {
         this.input = new Scanner(input);
         this.output = new PrintStream(output);
         this.editTaskMenu = editTaskMenu;
@@ -27,6 +29,7 @@ public class EditProjectMenu {
         this.editProjectPermissionsMenu = editProjectPermissionsMenu;
         this.deleteTaskUseCase = deleteTaskUseCase;
         this.getProjectUseCase = getProjectUseCase;
+        this.projectMenu = projectMenu;
     }
 
     public void start(User user, Project project) {
@@ -57,10 +60,11 @@ public class EditProjectMenu {
     private void deleteTask(Project project, User user, Task task) {
         if (!project.getPermissions().containsKey(user) || project.getPermissions().get(user).equals(Boolean.FALSE)) {
             output.println("You do not have the necessary permissions to delete this task. \n");
-            start(user, project);
+            projectMenu.start(user);
         } else {
             deleteTaskUseCase.deleteTaskFromProject(task, project);
-            start(user, getProjectUseCase.getProject(project.getId()));
+            project = getProjectUseCase.getProject(project.getId());
+            start(user, project);
         }
     }
 
