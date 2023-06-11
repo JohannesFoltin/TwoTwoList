@@ -6,6 +6,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Project {
+    private final UUID id;
+    private List<Task> taskList;
+    private String title;
+    private Map<User, Boolean> permissions;
     public Project(UUID id, List<Task> taskList, String title, Map<User, Boolean> permissions) {
         this.id = id;
         this.taskList = taskList;
@@ -33,11 +37,9 @@ public class Project {
         title = newTitle;
     }
 
-    private final UUID id;
-    private List<Task> taskList;
-    private String title;
-    private Map<User, Boolean> permissions;
-
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
 
     @Override
     public boolean equals(Object o) {
