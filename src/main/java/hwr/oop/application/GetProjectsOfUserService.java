@@ -1,6 +1,7 @@
 package hwr.oop.application;
 
-import hwr.oop.persistence.LoadPort;
+import hwr.oop.inports.GetProjectsOfUserUseCase;
+import hwr.oop.outports.LoadPort;
 
 import java.util.List;
 

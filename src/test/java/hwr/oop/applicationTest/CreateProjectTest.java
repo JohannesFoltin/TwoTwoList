@@ -1,13 +1,13 @@
 package hwr.oop.applicationTest;
 
 import hwr.oop.application.CreateProjectService;
-import hwr.oop.application.CreateProjectUseCase;
+import hwr.oop.inports.CreateProjectUseCase;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
+import hwr.oop.application.AppData;
+import hwr.oop.outports.LoadPort;
 import hwr.oop.persistence.PersistenceAdapter;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.outports.SavePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

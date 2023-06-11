@@ -1,6 +1,6 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.CreateProjectUseCase;
+import hwr.oop.inports.CreateProjectUseCase;
 import hwr.oop.application.Task;
 import hwr.oop.application.User;
 

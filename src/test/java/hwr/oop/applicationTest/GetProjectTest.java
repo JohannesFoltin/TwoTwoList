@@ -2,7 +2,7 @@ package hwr.oop.applicationTest;
 
 import hwr.oop.application.GetProjectService;
 import hwr.oop.application.Project;
-import hwr.oop.persistence.AppData;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.PersistenceAdapter;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

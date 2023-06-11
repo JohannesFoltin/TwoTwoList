@@ -1,7 +1,4 @@
-package hwr.oop.persistence;
-
-import hwr.oop.application.Project;
-import hwr.oop.application.User;
+package hwr.oop.application;
 
 import java.util.List;
 import java.util.Objects;

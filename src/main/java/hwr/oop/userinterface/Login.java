@@ -1,9 +1,9 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.CreateUserUseCase;
+import hwr.oop.inports.CreateUserUseCase;
 import hwr.oop.application.User;
-import hwr.oop.application.ValidateUserUseCase;
-import hwr.oop.persistence.UserNotInAppDataException;
+import hwr.oop.inports.ValidateUserUseCase;
+import hwr.oop.application.UserNotInAppDataException;
 
 import java.io.InputStream;
 import java.io.OutputStream;

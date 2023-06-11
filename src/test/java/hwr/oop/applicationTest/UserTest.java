@@ -1,6 +1,9 @@
 package hwr.oop.applicationTest;
 
 import hwr.oop.application.*;
+import hwr.oop.inports.CreateProjectUseCase;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 import hwr.oop.persistence.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

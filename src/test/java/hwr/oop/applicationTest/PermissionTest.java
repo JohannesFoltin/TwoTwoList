@@ -1,8 +1,8 @@
 package hwr.oop.applicationTest;
 import hwr.oop.application.*;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.application.AppData;
+import hwr.oop.outports.SavePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;

@@ -1,9 +1,11 @@
 package hwr.oop.userinterfaceTests;
 
 import hwr.oop.application.*;
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.application.AppData;
+import hwr.oop.inports.CreateUserUseCase;
+import hwr.oop.inports.ValidateUserUseCase;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 import hwr.oop.userinterface.Login;
 import hwr.oop.userinterface.MainMenu;
 import org.junit.jupiter.api.BeforeEach;

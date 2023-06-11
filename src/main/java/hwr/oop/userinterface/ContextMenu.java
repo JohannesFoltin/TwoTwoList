@@ -1,6 +1,8 @@
 package hwr.oop.userinterface;
 
 import hwr.oop.application.*;
+import hwr.oop.inports.CreateTaskUseCase;
+import hwr.oop.inports.DeleteTaskUseCase;
 
 import java.io.InputStream;
 import java.io.OutputStream;

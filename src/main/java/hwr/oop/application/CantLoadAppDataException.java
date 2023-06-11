@@ -1,4 +1,4 @@
-package hwr.oop.persistence;
+package hwr.oop.application;
 
 public class CantLoadAppDataException extends RuntimeException {
     public CantLoadAppDataException(String message) {

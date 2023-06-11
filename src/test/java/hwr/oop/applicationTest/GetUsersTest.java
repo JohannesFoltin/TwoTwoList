@@ -1,10 +1,8 @@
 package hwr.oop.applicationTest;
 
-import hwr.oop.application.GetProjectService;
 import hwr.oop.application.GetUsersService;
-import hwr.oop.application.Project;
 import hwr.oop.application.User;
-import hwr.oop.persistence.AppData;
+import hwr.oop.application.AppData;
 import hwr.oop.persistence.PersistenceAdapter;
 import org.junit.jupiter.api.Test;
 

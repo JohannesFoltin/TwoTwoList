@@ -1,4 +1,6 @@
-package hwr.oop.application;
+package hwr.oop.inports;
+
+import hwr.oop.application.Project;
 
 public interface DeleteProjectUseCase {
 

@@ -1,12 +1,11 @@
 package hwr.oop.applicationTest;
 
-import hwr.oop.application.CreateTaskException;
 import hwr.oop.application.User;
 import hwr.oop.application.ValidateUserService;
-import hwr.oop.application.ValidateUserUseCase;
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.UserNotInAppDataException;
+import hwr.oop.inports.ValidateUserUseCase;
+import hwr.oop.application.AppData;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.application.UserNotInAppDataException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

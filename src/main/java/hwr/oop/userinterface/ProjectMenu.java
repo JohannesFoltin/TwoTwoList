@@ -1,7 +1,7 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.DeleteProjectUseCase;
-import hwr.oop.application.GetProjectsOfUserUseCase;
+import hwr.oop.inports.DeleteProjectUseCase;
+import hwr.oop.inports.GetProjectsOfUserUseCase;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;
 import java.io.InputStream;
