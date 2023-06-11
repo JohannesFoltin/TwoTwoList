@@ -1,5 +1,6 @@
 package hwr.oop.userinterface;
 
+import hwr.oop.application.CreateUserUseCase;
 import hwr.oop.application.User;
 import hwr.oop.application.ValidateUserUseCase;
 import hwr.oop.persistence.UserNotInAppDataException;
@@ -15,11 +16,14 @@ public class Login {
     private final MainMenu mainMenu;
     private final ValidateUserUseCase validateUserUseCase;
 
-    public Login(InputStream input, OutputStream out, MainMenu mainMenu, ValidateUserUseCase validateUserUseCase) {
+    private  final CreateUserUseCase createUserUseCase;
+
+    public Login(InputStream input, OutputStream out, MainMenu mainMenu, ValidateUserUseCase validateUserUseCase, CreateUserUseCase createUserUseCase) {
         this.input = new Scanner(input);
         this.out = new PrintStream(out);
         this.mainMenu = mainMenu;
         this.validateUserUseCase = validateUserUseCase;
+        this.createUserUseCase = createUserUseCase;
     }
 
     public void start() {
@@ -51,8 +55,12 @@ public class Login {
     }
 
     public void registerUser() {
+
         out.print("Enter username for new user:\n");
         String name = input.nextLine();
 
+        User user = createUserUseCase.createUser(name);
+        out.print("New User created with name: " + name);
+        mainMenu.start(user);
     }
 }

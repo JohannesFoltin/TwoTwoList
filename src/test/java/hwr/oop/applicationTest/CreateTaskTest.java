@@ -6,7 +6,12 @@ import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,6 +22,8 @@ import java.util.UUID;
 class CreateTaskTest {
     private  LoadPort loadPort;
     private CreateTaskService createTaskService;
+    @Mock
+    private SavePort savePort;
     AppData appDataMock;
     @BeforeEach
     void setUp() {
@@ -33,9 +40,9 @@ class CreateTaskTest {
 
 
         loadPort = () -> appDataMock;
-        SavePort savePort = appData -> appDataMock = appData;
+        savePort = mock();
 
-        savePort.saveData(new AppData(projects,users));
+        appDataMock = new AppData(projects,users);
 
         createTaskService = new CreateTaskService(loadPort, savePort);
     }
@@ -59,6 +66,7 @@ class CreateTaskTest {
         assertThat(createdTask.getContent()).isEqualTo(content);
         assertThat(createdTask.getTaskState()).isEqualTo(taskState);
         result.ifPresent(localDate -> assertThat(localDate).isBetween(LocalDateTime.now().minusHours(1),LocalDateTime.now()));
+        verify(savePort).saveData(any());
     }
 
     @Test
@@ -96,6 +104,8 @@ class CreateTaskTest {
         assertThat(createdTask.getContent()).isEqualTo(content);
         assertThat(createdTask.getTaskState()).isEqualTo(taskState);
         result.ifPresent(localDate -> assertThat(localDate).isBetween(LocalDateTime.now().minusHours(1),LocalDateTime.now()));
+        verify(savePort).saveData(any());
+
     }
 
     @Test
