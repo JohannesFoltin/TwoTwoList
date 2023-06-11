@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.*;
 
 
-public class PermissionTest {
+class PermissionTest {
     private LoadPort loadPort;
     private MySavePort savePort;
     private ChangePermissionService changePermissionService;
@@ -38,23 +38,38 @@ public class PermissionTest {
         AppData appData= loadPort.loadData();
         Project project = appData.getProjectList().get(0);
         User user = appData.getUserList().get(0);
-        changePermissionService.removePermissionUser(project,user);
+        changePermissionService.removePermission(project,user);
         assertThat(savePort.isFlag()).isEqualTo(true);
         assertThat(loadPort.loadData().getProjectList().get(0).getPermissions().containsKey(user)).isFalse();
     }
     @Test
-    void RemoveUserUnsuccessfully(){
+    void RemovePermissionUnsuccessfully(){
         AppData appData= loadPort.loadData();
         Map<User, Boolean> permissions= new HashMap<>();
         Project project = new Project(UUID.randomUUID(),null,"Title",permissions);
         User user = appData.getUserList().get(0);
         try {
-            changePermissionService.removePermissionUser(project,user);
+            changePermissionService.removePermission(project,user);
             fail("project not found");
         }catch (CanNotFindProjectForPermissionChange e){
             e.printStackTrace();
         }
     }
+
+    @Test
+    void removePermissionsWrongUserTest(){
+        Project project = RandomTestData.getRandomProject();
+        User user = RandomTestData.getRandomUser();
+        AppData appData = new AppData(List.of(project), List.of(user));
+        savePort.saveData(appData);
+        try {
+            changePermissionService.removePermission(project, user);
+            fail("should throw exception");
+        } catch (CanNotFindUserToRemove e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     void ChangePermissionUnsuccessfully(){
         AppData appData= loadPort.loadData();
@@ -64,7 +79,7 @@ public class PermissionTest {
         try {
             changePermissionService.changePermission(project,user,true);
             fail("project not found");
-        }catch (CanNotFindProjectForPermissionChange e){
+        } catch (CanNotFindProjectForPermissionChange e){
             e.printStackTrace();
         }
     }

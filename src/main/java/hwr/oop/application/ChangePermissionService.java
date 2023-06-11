@@ -13,29 +13,32 @@ public class ChangePermissionService implements ChangePermissionUseCase {
         this.loadPort = loadPort;
         this.savePort = savePort;
     }
+
     @Override
     public void changePermission(Project project, User user, Boolean permission){
-        int ind = loadPort.loadData().getProjectList().indexOf(project);
-        if(ind>=0) {
-            AppData appData = loadPort.loadData();
-            appData.getProjectList().get(ind).changePermission(user,permission);
-            savePort.saveData(appData);
-        }
-        else{
+        AppData appData = loadPort.loadData();
+
+        if(!appData.getProjectList().contains(project)) {
             throw new CanNotFindProjectForPermissionChange("project not found");
         }
+        Project toBeEdited = loadPort.loadProjectById(project.getId());
+        toBeEdited.changePermission(user, permission);
+        savePort.saveData(appData);
     }
 
     @Override
-    public void removePermissionUser(Project project, User user){
-        int ind = loadPort.loadData().getProjectList().indexOf(project);
-        if(ind>=0) {
-            AppData appData = loadPort.loadData();
-            appData.getProjectList().get(ind).removePermissionUser(user);
-            savePort.saveData(appData);
-        }
-        else{
+    public void removePermission(Project project, User user){
+        AppData appData = loadPort.loadData();
+
+        if(!appData.getProjectList().contains(project)) {
             throw new CanNotFindProjectForPermissionChange("project not found");
         }
+        Project toBeEdited = loadPort.loadProjectById(project.getId());
+
+        if (!toBeEdited.getPermissions().containsKey(user)) {
+            throw new CanNotFindUserToRemove("user not found");
+        }
+        toBeEdited.removePermissionUser(user);
+        savePort.saveData(appData);
     }
 }

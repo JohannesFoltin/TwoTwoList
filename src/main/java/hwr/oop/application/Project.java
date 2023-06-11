@@ -33,12 +33,7 @@ public class Project {
             permissions.put(user, permission);
     }
     public void removePermissionUser(User user){
-        if(permissions.containsKey(user)) {
-            permissions.remove(user);
-        }
-        else{
-            throw new CanNotFindUserToRemove("user not found");
-        }
+        permissions.remove(user);
     }
 
 
