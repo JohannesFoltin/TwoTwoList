@@ -7,6 +7,7 @@ import hwr.oop.persistence.SavePort;
 import hwr.oop.userinterface.ContextMenu;
 import hwr.oop.userinterface.EditTaskMenu;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -84,7 +85,7 @@ class ContextMenuTest {
                 "Type 1 to create a new Task\n" +
                 "Type 2 to delete a Task\n" +
                 "Type 3 to edit a Task\n" +
-                "Please choose the number of the task you want to edit\n");
+                "Please choose the number of the task you want to edit \n");
 
     }
     @Test
