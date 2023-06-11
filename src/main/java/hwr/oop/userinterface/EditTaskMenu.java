@@ -11,12 +11,12 @@ public class EditTaskMenu {
     private final Scanner input;
     private final PrintStream output;
 
-    private final ChangeTaskTitleUseCase changeTaskTitleUseCase;
+    private final ChangeTaskUseCase changeTaskUseCase;
 
-    public EditTaskMenu(InputStream input, OutputStream output, ChangeTaskTitleUseCase changeTaskTitleUseCase) {
+    public EditTaskMenu(InputStream input, OutputStream output, ChangeTaskUseCase changeTaskUseCase) {
         this.input = new Scanner(input);
         this.output = new PrintStream(output);
-        this.changeTaskTitleUseCase = changeTaskTitleUseCase;
+        this.changeTaskUseCase = changeTaskUseCase;
     }
 
     public void startWithUser(Task task,User user) {

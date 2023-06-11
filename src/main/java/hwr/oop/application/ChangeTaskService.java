@@ -4,10 +4,14 @@ package hwr.oop.application;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 
-public class ChangeTaskTitleService implements ChangeTaskTitleUseCase {
+public class ChangeTaskService implements ChangeTaskUseCase {
     private final LoadPort loadPort;
     private final SavePort savePort;
 
+    public ChangeTaskService(LoadPort loadPort, SavePort savePort) {
+        this.loadPort = loadPort;
+        this.savePort = savePort;
+    }
 
     @Override
     public void changeTitleInProject(Task task, String newTitle, Project project) {

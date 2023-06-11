@@ -1,6 +1,6 @@
 package hwr.oop.application;
 
-public interface ChangeTaskTitleUseCase {
+public interface ChangeTaskUseCase {
     void changeTitleInProject(Task task, String newTitle,Project project);
     void changeContentInProject(Task task, String newContent,Project project);
     void changeTaskStateInProject(Task task, TaskState taskState ,Project project);
