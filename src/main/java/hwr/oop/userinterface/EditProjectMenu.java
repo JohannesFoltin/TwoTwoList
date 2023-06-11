@@ -56,6 +56,14 @@ public class EditProjectMenu {
     }
 
     private Task chooseTask(Project project) {
+        output.println("Which task? (1 - " + project.getTaskList().size() + ") \n");
+        String choice = input.nextLine();
+        if (Integer.parseInt(choice) < 1 || Integer.parseInt(choice) > project.getTaskList().size()) {
+            output.println("Invalid Choice. \n");
+            return chooseTask(project);
+        } else {
+            return project.getTaskList().get(Integer.parseInt(choice) - 1);
+        }
     }
 
     private void listTasks(Project project) {
