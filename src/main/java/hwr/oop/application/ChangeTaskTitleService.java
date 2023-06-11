@@ -1,4 +1,5 @@
 package hwr.oop.application;
+
 import hwr.oop.persistence.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
@@ -14,7 +15,7 @@ public class ChangeTaskTitleService implements ChangeTaskTitleUseCase {
 
     @Override
     public void changeTitle(Task task, String newTitle){
-        int ind =loadPort.loadData().getTaskList().indexOf(task);
+        int ind = loadPort.loadData().().indexOf(task);
         if(ind>=0){
             AppData appData= loadPort.loadData();
             appData.getTaskList().get(ind).changeTitle(newTitle);
