@@ -47,7 +47,6 @@ class ContextMenuTest {
     }
     @Test
     void startTestToEditTaskMenu(){
-        appDataMock.getUserList().add(new User(UUID.randomUUID(),"Test",null,null));
 
         InputStream inputStream = createInputStreamForInput("3\n");
         OutputStream outputStream = new ByteArrayOutputStream();
@@ -60,7 +59,20 @@ class ContextMenuTest {
         verify(editTaskMenu).start();
 
     }
-    
+    @Test
+    void createNewTaskTest(){
+        InputStream inputStream = createInputStreamForInput("1\nhallo\ncontent\n1\n2004-05-22 13:02");
+        OutputStream outputStream = new ByteArrayOutputStream();
+
+        ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase);
+        User user = appDataMock.getUserList().get(0);
+        contextMenu.start(user);
+
+        String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
+        assertThat(appDataMock.getUserList().get(0).getContextList().get(1).getTitle()).isEqualTo("hallo");
+
+    }
+
 
     private InputStream createInputStreamForInput(String input) {
         byte[] inputInBytes = input.getBytes();
