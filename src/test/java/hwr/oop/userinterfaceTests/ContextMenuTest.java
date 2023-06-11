@@ -63,6 +63,16 @@ class ContextMenuTest {
 
     }
     @Test
+    void startTestUnsuccessfully(){
+        InputStream inputStream = createInputStreamForInput("5\n");
+        OutputStream outputStream = new ByteArrayOutputStream();
+
+        ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
+        User user = appDataMock.getUserList().get(0);
+        contextMenu.start(user);
+
+    }
+    @Test
     void createNewTaskTest(){
         InputStream inputStream = createInputStreamForInput("1\nhallo\ncontent\n1\n2004-05-22 13:02");
         OutputStream outputStream = new ByteArrayOutputStream();
