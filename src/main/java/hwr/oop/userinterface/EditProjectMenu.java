@@ -1,8 +1,6 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.Project;
-import hwr.oop.application.Task;
-import hwr.oop.application.User;
+import hwr.oop.application.*;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,16 +13,20 @@ public class EditProjectMenu {
     private final EditTaskMenu editTaskMenu;
     private final AddTaskToProjectMenu addTaskToProjectMenu;
     private final EditProjectPermissionsMenu editProjectPermissionsMenu;
+    private final DeleteTaskUseCase deleteTaskUseCase;
+    private final GetProjectUseCase getProjectUseCase;
 
     public EditProjectMenu(InputStream input, OutputStream output,
                            EditTaskMenu editTaskMenu,
                            AddTaskToProjectMenu addTaskToProjectMenu,
-                           EditProjectPermissionsMenu editProjectPermissionsMenu) {
+                           EditProjectPermissionsMenu editProjectPermissionsMenu, DeleteTaskUseCase deleteTaskUseCase, GetProjectUseCase getProjectUseCase) {
         this.input = new Scanner(input);
         this.output = new PrintStream(output);
         this.editTaskMenu = editTaskMenu;
         this.addTaskToProjectMenu = addTaskToProjectMenu;
         this.editProjectPermissionsMenu = editProjectPermissionsMenu;
+        this.deleteTaskUseCase = deleteTaskUseCase;
+        this.getProjectUseCase = getProjectUseCase;
     }
 
     public void start(User user, Project project) {
@@ -53,6 +55,13 @@ public class EditProjectMenu {
     }
 
     private void deleteTask(Project project, User user, Task task) {
+        if (!project.getPermissions().containsKey(user) || project.getPermissions().get(user).equals(Boolean.FALSE)) {
+            output.println("You do not have the necessary permissions to delete this task. \n");
+            start(user, project);
+        } else {
+            deleteTaskUseCase.deleteTaskFromProject(task, project);
+            start(user, getProjectUseCase.getProject(project.getId()));
+        }
     }
 
     private Task chooseTask(Project project) {
