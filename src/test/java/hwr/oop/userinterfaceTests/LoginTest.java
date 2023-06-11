@@ -48,8 +48,12 @@ class LoginTest {
 
         login.start();
 
-        String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
+        String output = outputStream.toString().strip(); //This is how you can get the result output (sadly the complete, not the last line!)
         verify(mainMenu).start(any());
+        assertThat(output).isEqualTo("What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:");
 
     }
     @Test
@@ -66,6 +70,15 @@ class LoginTest {
 
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
         verify(mainMenu).start(any());
+        assertThat(output).isEqualTo("What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:\n" +
+                "Username not found\n" +
+                "What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:\n");
 
     }
 

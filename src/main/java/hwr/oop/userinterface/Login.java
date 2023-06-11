@@ -23,9 +23,9 @@ public class Login {
     }
 
     public void start() {
-        out.println("What do you wanna do??????");
-        out.println("Type 1 to login");
-        out.println("Type 2 to register a new user");
+        out.print("What do you wanna do??????\n");
+        out.print("Type 1 to login\n");
+        out.print("Type 2 to register a new user\n");
         String choice = input.nextLine();
 
         if (choice.equals("1")) {
@@ -37,7 +37,7 @@ public class Login {
     }
 
     public void loginLogin() {
-        out.println("Enter Username:\n");
+        out.print("Enter Username:\n");
         String name = input.nextLine();
 
         User user;
@@ -45,7 +45,7 @@ public class Login {
             user = validateUserUseCase.validateUser(name);
             mainMenu.start(user);
         } catch (UserNotInAppDataException e) {
-            out.println("Username not found");
+            out.print("Username not found\n");
             start();
         }
     }

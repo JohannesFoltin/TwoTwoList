@@ -23,6 +23,7 @@ This repository contains a student project created for an ongoing lecture on obj
 
 [TODO]: # (For each additional dependency your project requires- Add an additional row to the table!)
 
-| Number | Dependency Name | Dependency Description | Why is it necessary? |
-|--------|-----------------|------------------------|----------------------|
-| 1      | Gson | (de-)serialization of data from and to JSON | persistenceImplementation |
+| Number | Dependency Name | Dependency Description                      | Why is it necessary?      |
+|--------|----------------|---------------------------------------------|---------------------------|
+| 1      | Gson           | (de-)serialization of data from and to JSON | persistenceImplementation |
+| 2      | Mockito        | Automaticly mocks for tests                 | saves a ton of time       |
