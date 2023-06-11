@@ -1,13 +1,10 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.ChangePermissionUseCase;
-import hwr.oop.application.Project;
-import hwr.oop.application.User;
+import hwr.oop.application.*;
 
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,29 +12,22 @@ public class EditProjectPermissionsMenu {
     private final Scanner input;
     private final PrintStream output;
     private final EditProjectMenu editProjectMenu;
+    private final GetUsersUseCase getUsersUseCase;
     private final ChangePermissionUseCase changePermissionUseCase;
 
     public EditProjectPermissionsMenu(InputStream input, OutputStream output, EditProjectMenu editProjectMenu,
-                                      ChangePermissionUseCase changePermissionUseCase) {
+                                      GetUsersUseCase getUsersUseCase, ChangePermissionUseCase changePermissionUseCase) {
         this.input = new Scanner(input);
         this.output = new PrintStream(output);
         this.editProjectMenu = editProjectMenu;
+        this.getUsersUseCase = getUsersUseCase;
         this.changePermissionUseCase = changePermissionUseCase;
     }
 
     public void start(Project project, User user) {
         checkPermissions(project, user);
-        output.println("What do you want to do? ");
-        output.println("Type 1 to edit or delete an already existing permission. ");
-        output.println("Type 2 to add a new Permission. \n");
-        String choice = input.nextLine();
-        if (choice.equals("1")) {
-            User toBeEdited = chooseUser(project, user);
-            changePermission(project, toBeEdited);
-        } else {
-            changePermission(project);
-        }
-
+        User toBeEdited = chooseUser(user);
+        changePermission(project, toBeEdited);
     }
 
     void checkPermissions(Project project, User user) {
@@ -47,21 +37,22 @@ public class EditProjectPermissionsMenu {
         }
     }
 
-    User chooseUser(Project project, User user) {
-        List<User> userList = new ArrayList<>(project.getPermissions().keySet());
-        output.println("These are the users, that currently have Permissions on this project. ");
+    User chooseUser(User user) {
+        List<User> userList = getUsersUseCase.getUsers();
+        output.println("These are all current users: ");
         for (int i = 0; i < userList.size(); i++) {
             output.println(i+1 + ": " + userList.get(i));
         }
+
         output.println("Which users permission do you want to edit? (1 - " + userList.size() + ") \n");
         String choice = input.nextLine();
         if (Integer.parseInt(choice) < 1 || Integer.parseInt(choice) > userList.size()) {
             output.println("Invalid input, please try again. \n");
-            return chooseUser(project, user);
+            return chooseUser(user);
         } else {
             if (userList.get(Integer.parseInt(choice)).equals(user)) {
                 output.println("You can't edit your own permission. \n");
-                return chooseUser(project, user);
+                return chooseUser(user);
             } else {
                 return userList.get(Integer.parseInt(choice));
             }
@@ -69,10 +60,6 @@ public class EditProjectPermissionsMenu {
     }
 
     private void changePermission(Project project, User toBeEdited) {
-
-    }
-
-    private void changePermission(Project project) {
 
     }
 }
