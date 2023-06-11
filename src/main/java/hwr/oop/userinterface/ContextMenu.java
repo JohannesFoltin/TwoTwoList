@@ -1,9 +1,6 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.CreateTaskUseCase;
-import hwr.oop.application.Task;
-import hwr.oop.application.TaskState;
-import hwr.oop.application.User;
+import hwr.oop.application.*;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,6 +16,7 @@ public class ContextMenu {
     private final PrintStream output;
     private final EditTaskMenu editTaskMenu;
     private final CreateTaskUseCase createTaskUseCase;
+    private final DeleteTaskUseCase
 
     public ContextMenu(InputStream input, OutputStream out, EditTaskMenu editTaskMenu,
                        hwr.oop.application.CreateTaskUseCase createTaskUseCase) {
@@ -26,6 +24,7 @@ public class ContextMenu {
         this.output = new PrintStream(out);
         this.editTaskMenu = editTaskMenu;
         this.createTaskUseCase = createTaskUseCase;
+        this.de
     }
     public void start(User user) {
         List<Task> contextlist= user.getContextList();
