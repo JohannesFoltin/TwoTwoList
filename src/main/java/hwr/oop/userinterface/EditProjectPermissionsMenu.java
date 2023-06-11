@@ -27,7 +27,7 @@ public class EditProjectPermissionsMenu {
     public void start(Project project, User user) {
         checkPermissions(project, user);
         User toBeEdited = chooseUser(user);
-        changePermission(project, toBeEdited);
+        changePermission(project, toBeEdited, user);
     }
 
     void checkPermissions(Project project, User user) {
@@ -59,7 +59,22 @@ public class EditProjectPermissionsMenu {
         }
     }
 
-    private void changePermission(Project project, User toBeEdited) {
-
+    private void changePermission(Project project, User toBeEdited, User user) {
+        output.print("What Permission should this user have on this project? \n");
+        output.print("Type 1 if the user should not have any permissions. \n");
+        output.print("Type 2 if the user should have read-access. \n");
+        output.print("Type 3 if the user should have write-access. \n");
+        String choice = input.nextLine();
+        if (choice.equals("1")) {
+            changePermissionUseCase.removePermission(project, toBeEdited);
+        } else if (choice.equals("2")) {
+            changePermissionUseCase.changePermission(project, toBeEdited, Boolean.FALSE);
+        } else if (choice.equals("3")) {
+            changePermissionUseCase.changePermission(project, toBeEdited, Boolean.TRUE);
+        } else {
+            output.print("Input invalid, please try again. \n");
+            changePermission(project, toBeEdited, user);
+        }
+        editProjectMenu.start(user, project);
     }
 }
