@@ -49,7 +49,7 @@ class ContextMenuTest {
     @Test
     void startTestToEditTaskMenu(){
 
-        InputStream inputStream = createInputStreamForInput("3\n");
+        InputStream inputStream = createInputStreamForInput("3\n0\n");
         OutputStream outputStream = new ByteArrayOutputStream();
 
         ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
@@ -57,7 +57,7 @@ class ContextMenuTest {
         contextMenu.start(user);
 
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
-        verify(editTaskMenu).start();
+        verify(editTaskMenu).start(any());
 
     }
     @Test
