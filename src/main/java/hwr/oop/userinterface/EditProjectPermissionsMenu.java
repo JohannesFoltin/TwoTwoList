@@ -25,19 +25,26 @@ public class EditProjectPermissionsMenu {
     }
 
     public void start(Project project, User user) {
-        checkPermissions(project, user);
-        User toBeEdited = chooseUser(user);
-        changePermission(project, toBeEdited, user);
+        if (checkPermissions(project, user)) {
+            checkPermissions(project, user);
+            User toBeEdited = chooseUser(user);
+            changePermission(project, toBeEdited, user);
+        } else {
+            editProjectMenu.start(user, project);
+        }
+
     }
 
-    void checkPermissions(Project project, User user) {
+    private boolean checkPermissions(Project project, User user) {
         if (!project.getPermissions().containsKey(user) || project.getPermissions().get(user).equals(Boolean.FALSE)) {
             output.println("You do not have the necessary permissions to edit the permissions of this project");
-            editProjectMenu.start(user, project);
+            return Boolean.FALSE;
+        } else {
+            return Boolean.TRUE;
         }
     }
 
-    User chooseUser(User user) {
+    private User chooseUser(User user) {
         List<User> userList = getUsersUseCase.getUsers();
         output.println("These are all current users: ");
         for (int i = 0; i < userList.size(); i++) {

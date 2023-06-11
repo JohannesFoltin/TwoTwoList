@@ -24,26 +24,31 @@ public class AddTaskToProjectMenu {
     }
 
     public void start(Project project, User user) {
-        checkPermission(project, user);
-        output.println("What do you want to name your task? \n");
-        String title = input.nextLine();
-        output.println("Add content of your new task: \n");
-        String content = input.nextLine();
+         if (checkPermission(project, user)) {
+             output.println("What do you want to name your task? \n");
+             String title = input.nextLine();
+             output.println("Add content of your new task: \n");
+             String content = input.nextLine();
 
-        TaskState state = chooseTaskState(project);
-        Optional<LocalDateTime> deadline = chooseDeadline(project);
+             TaskState state = chooseTaskState(project);
+             Optional<LocalDateTime> deadline = chooseDeadline(project);
 
-        if (deadline.isEmpty()) {
-            createTaskUseCase.createTaskInProject(title, content, state, null, project);
-        } else {
-            createTaskUseCase.createTaskInProject(title, content, state, deadline.get(), project);
-        }
+             if (deadline.isEmpty()) {
+                 createTaskUseCase.createTaskInProject(title, content, state, null, project);
+             } else {
+                 createTaskUseCase.createTaskInProject(title, content, state, deadline.get(), project);
+             }
+         } else {
+             editProjectMenu.start(user, project);
+         }
     }
 
-    private void checkPermission(Project project, User user) {
+    private boolean checkPermission(Project project, User user) {
         if (!project.getPermissions().containsKey(user) || project.getPermissions().get(user).equals(Boolean.FALSE)) {
             output.println("You do not have the necessary permissions to add a task to this project");
-            editProjectMenu.start(user, project);
+            return Boolean.FALSE;
+        } else {
+            return Boolean.TRUE;
         }
     }
 
