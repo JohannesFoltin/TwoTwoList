@@ -63,6 +63,13 @@ class TaskTest {
         assertThat(task).doesNotHaveSameHashCodeAs(new Object());
     }
 
+    @Test
+    void toStringTest() {
+        Task task = new Task(UUID.fromString("84637784-a92d-4faf-815e-4ce70b2f2a4f"), "testTitle",
+                null, null, null);
+        assertThat(task.toString()).hasToString("84637784-a92d-4faf-815e-4ce70b2f2a4f - testTitle");
+    }
+
     @ParameterizedTest
     @EnumSource(value = TaskState.class, names = {"IN_REVIEW", "IN_PROGRESS"})
     void completeTaskSuccessfully(TaskState state) {

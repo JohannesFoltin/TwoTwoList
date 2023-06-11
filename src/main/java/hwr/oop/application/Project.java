@@ -6,6 +6,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Project {
+    private final UUID id;
+    private List<Task> taskList;
+    private String title;
+    private Map<User, Boolean> permissions;
+
     public Project(UUID id, List<Task> taskList, String title, Map<User, Boolean> permissions) {
         this.id = id;
         this.taskList = taskList;
@@ -32,12 +37,16 @@ public class Project {
     public void changeTitle(String newTitle){
         title = newTitle;
     }
+    public void changePermission(User user, Boolean permission){
+            permissions.put(user, permission);
+    }
+    public void removePermissionUser(User user){
+        permissions.remove(user);
+    }
 
-    private final UUID id;
-    private List<Task> taskList;
-    private String title;
-    private Map<User, Boolean> permissions;
-
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -53,5 +62,10 @@ public class Project {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getTaskList(), getTitle(), getPermissions());
+    }
+
+    @Override
+    public String toString() {
+        return id.toString() + " - " + title;
     }
 }

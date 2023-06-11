@@ -93,4 +93,9 @@ public class Task {
     public int hashCode() {
         return Objects.hash(getId(), getTitle(), getContent(), getTaskState(), getDeadline());
     }
+
+    @Override
+    public String toString() {
+        return id.toString() + " - " + title;
+    }
 }

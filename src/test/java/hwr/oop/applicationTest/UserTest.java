@@ -136,4 +136,10 @@ class UserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void toStringTest() {
+        User user = RandomTestData.getRandomUser();
+        assertThat(user.toString()).hasToString(user.getId() + " - " + user.getName());
+    }
 }

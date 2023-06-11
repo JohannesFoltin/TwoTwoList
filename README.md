@@ -13,29 +13,19 @@ This repository contains a student project created for an ongoing lecture on obj
 | 2      | rename Project           |    - [ ]    | - [ ]  |
 | 3      | add/remove Task          |    - [x]    | - [x]  |
 | 4      | merge Project            |    - [ ]    | - [ ]  |
-| 5      | Project Modifier Access  |    - [ ]    | - [ ]  |
+| 5      | Project Modifier Access  |    - [x]    | - [x]  |
 | 6      | create/delete Task       |    - [ ]    | - [ ]  |
 | 7      | modify Task Attributes   |    - [ ]    | - [ ]  |
 | 8      | edit Task State          |    - [ ]    | - [ ]  |
 | 9      | create Kontextliste      |    - [ ]    | - [ ]  |
 
-## Optional Features
 
-
-[TODO]: # (For each additional dependency your project requires- Add an additional row to the table!)
-
-| Number | Optional Feature         | Implemented   | Tested        |
-|--------|--------------------------|:-------------:|:-------------:|
-| 1      | send Notifications       | - [ ]         | - [ ]         |
-| 2      | create a simple Tutorial | - [ ]         | - [ ]         |
-| 3      | add Tableflip option     | - [ ]         | - [ ]         |
-| 4      | set Project as done      | - [ ]         | - [ ]         |
-| 5      | clear Kontextliste weekly| - [ ]         | - [ ]         |
 
 ## Additional Dependencies
 
 [TODO]: # (For each additional dependency your project requires- Add an additional row to the table!)
 
-| Number | Dependency Name | Dependency Description | Why is it necessary? |
-|--------|-----------------|------------------------|----------------------|
-| 1      | Gson            | Can be used to convert Java Objects into their JSON representation.                                     | Persistence          |
+| Number | Dependency Name | Dependency Description                      | Why is it necessary?      |
+|--------|----------------|---------------------------------------------|---------------------------|
+| 1      | Gson           | (de-)serialization of data from and to JSON | persistenceImplementation |
+| 2      | Mockito        | Automaticly mocks for tests                 | saves a ton of time       |
