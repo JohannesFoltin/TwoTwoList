@@ -1,7 +1,11 @@
-package hwr.oop.persistence;
+package hwr.oop.outports;
 
+import hwr.oop.application.AppData;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;
+import hwr.oop.application.ProjectNotInAppDataException;
+import hwr.oop.application.UserNotInAppDataException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

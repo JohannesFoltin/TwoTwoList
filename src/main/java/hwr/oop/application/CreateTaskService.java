@@ -1,13 +1,13 @@
 package hwr.oop.application;
 
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.inports.CreateTaskUseCase;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class CreateTaskService implements CreateTaskUseCase{
+public class CreateTaskService implements CreateTaskUseCase {
 
     public CreateTaskService(LoadPort loadPort, SavePort savePort) {
         this.loadPort = loadPort;

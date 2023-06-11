@@ -1,13 +1,14 @@
 package hwr.oop.userinterfaceTests;
 
 import hwr.oop.application.*;
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.application.AppData;
+import hwr.oop.inports.CreateTaskUseCase;
+import hwr.oop.inports.DeleteTaskUseCase;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 import hwr.oop.userinterface.ContextMenu;
 import hwr.oop.userinterface.EditTaskMenu;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -19,7 +20,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +31,7 @@ class ContextMenuTest {
     @Mock
     private EditTaskMenu editTaskMenu;
     private MySavePort savePort;
-    private CreateTaskUseCase  createTaskUseCase;
+    private CreateTaskUseCase createTaskUseCase;
     private DeleteTaskUseCase deleteTaskUseCase;
     @BeforeEach
     void setUp(){

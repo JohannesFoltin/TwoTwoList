@@ -1,6 +1,7 @@
 package hwr.oop.application;
 
-import hwr.oop.persistence.LoadPort;
+import hwr.oop.inports.GetProjectUseCase;
+import hwr.oop.outports.LoadPort;
 import java.util.UUID;
 
 public class GetProjectService implements GetProjectUseCase {

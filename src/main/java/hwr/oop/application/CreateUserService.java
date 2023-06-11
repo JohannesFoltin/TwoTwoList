@@ -1,13 +1,13 @@
 package hwr.oop.application;
 
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.inports.CreateUserUseCase;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class CreateUserService implements CreateUserUseCase{
+public class CreateUserService implements CreateUserUseCase {
     private final SavePort savePort;
     private final LoadPort loadPort;
 

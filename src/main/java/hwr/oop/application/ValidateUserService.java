@@ -1,12 +1,11 @@
 package hwr.oop.application;
 
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.UserNotInAppDataException;
+import hwr.oop.inports.ValidateUserUseCase;
+import hwr.oop.outports.LoadPort;
 
 import java.util.List;
 
-public class ValidateUserService implements ValidateUserUseCase{
+public class ValidateUserService implements ValidateUserUseCase {
     private final LoadPort loadPort;
 
     public ValidateUserService(LoadPort loadPort) {

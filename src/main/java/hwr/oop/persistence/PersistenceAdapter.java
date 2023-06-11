@@ -2,6 +2,11 @@ package hwr.oop.persistence;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import hwr.oop.application.AppData;
+import hwr.oop.application.CantLoadAppDataException;
+import hwr.oop.application.CantSaveAppDataException;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 
 import java.io.*;
 import java.time.LocalDateTime;

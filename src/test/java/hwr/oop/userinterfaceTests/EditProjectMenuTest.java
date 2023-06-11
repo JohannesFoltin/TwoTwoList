@@ -2,6 +2,8 @@ package hwr.oop.userinterfaceTests;
 
 import hwr.oop.application.*;
 import hwr.oop.applicationTest.RandomTestData;
+import hwr.oop.inports.DeleteTaskUseCase;
+import hwr.oop.inports.GetProjectUseCase;
 import hwr.oop.userinterface.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

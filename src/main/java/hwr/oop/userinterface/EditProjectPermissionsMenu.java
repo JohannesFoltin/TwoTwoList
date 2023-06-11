@@ -1,6 +1,8 @@
 package hwr.oop.userinterface;
 
 import hwr.oop.application.*;
+import hwr.oop.inports.ChangePermissionUseCase;
+import hwr.oop.inports.GetUsersUseCase;
 
 import java.io.InputStream;
 import java.io.OutputStream;

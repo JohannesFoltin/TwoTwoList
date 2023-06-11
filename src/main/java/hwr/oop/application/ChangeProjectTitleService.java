@@ -1,7 +1,7 @@
 package hwr.oop.application;
-import hwr.oop.persistence.AppData;
-import hwr.oop.persistence.LoadPort;
-import hwr.oop.persistence.SavePort;
+import hwr.oop.inports.ChangeProjectTitleUseCase;
+import hwr.oop.outports.LoadPort;
+import hwr.oop.outports.SavePort;
 
 public class ChangeProjectTitleService implements ChangeProjectTitleUseCase {
     private final LoadPort loadPort;
@@ -13,11 +13,11 @@ public class ChangeProjectTitleService implements ChangeProjectTitleUseCase {
     }
 
     @Override
-    public void changeTitle(Project project, String newTitle){
+    public void changeTitle(Project project, String title){
         int ind =loadPort.loadData().getProjectList().indexOf(project);
         if(ind>=0){
             AppData appData= loadPort.loadData();
-            appData.getProjectList().get(ind).changeTitle(newTitle);
+            appData.getProjectList().get(ind).changeTitle(title);
             savePort.saveData(appData);
         }
         else{

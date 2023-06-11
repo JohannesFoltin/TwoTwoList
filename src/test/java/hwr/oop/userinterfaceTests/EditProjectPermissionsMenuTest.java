@@ -2,6 +2,8 @@ package hwr.oop.userinterfaceTests;
 
 import hwr.oop.application.*;
 import hwr.oop.applicationTest.RandomTestData;
+import hwr.oop.inports.ChangePermissionUseCase;
+import hwr.oop.inports.GetUsersUseCase;
 import hwr.oop.userinterface.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

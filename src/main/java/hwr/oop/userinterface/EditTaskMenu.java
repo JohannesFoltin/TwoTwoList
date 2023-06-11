@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import hwr.oop.application.*;
+import hwr.oop.inports.ChangeTaskUseCase;
 
 public class EditTaskMenu {
     private final Scanner input;
