@@ -28,7 +28,34 @@ public class EditProjectMenu {
     }
 
     public void start(User user, Project project) {
+        listTasks(project);
+        output.println("What do you want to do?");
+        output.println("Type 1 to edit a task from this project.");
+        output.println("Type 2 to add a new task to this project.");
+        output.println("Type 3 to delete a task from this project.");
+        output.println("Type 4 to edit the user permissions of this project. \n");
+        String choice = input.nextLine();
 
+        if (choice.equals("1")) {
+            Task task = chooseTask(project);
+            editTaskMenu.start(project, user, task);
+        } else if (choice.equals("2")) {
+            addTaskToProjectMenu.start(project, user);
+        } else if (choice.equals("3")) {
+            Task task = chooseTask(project);
+            deleteTask(project, user, task);
+        } else if (choice.equals("4")) {
+            editProjectPermissionsMenu.start(project, user);
+        } else {
+            output.println("Invalid input, please try again. \n");
+            start(user, project);
+        }
+    }
+
+    private void deleteTask(Project project, User user, Task task) {
+    }
+
+    private Task chooseTask(Project project) {
     }
 
     private void listTasks(Project project) {
