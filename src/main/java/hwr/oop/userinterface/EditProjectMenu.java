@@ -31,5 +31,10 @@ public class EditProjectMenu {
 
     }
 
-
+    private void listTasks(Project project) {
+        output.println("These are all the tasks of Project " + project.getTitle() + ": \n");
+        for (int i=0; i<project.getTaskList().size(); i++) {
+            output.println(i+1 + " " + project.getTaskList().get(i));
+        }
+    }
 }
