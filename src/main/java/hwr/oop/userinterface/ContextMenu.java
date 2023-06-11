@@ -5,6 +5,8 @@ import hwr.oop.application.Task;
 import hwr.oop.application.TaskState;
 import hwr.oop.application.User;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,10 +20,10 @@ public class ContextMenu {
     private final EditTaskMenu editTaskMenu;
     private final CreateTaskUseCase createTaskUseCase;
 
-    public ContextMenu(Scanner input, PrintStream out, EditTaskMenu editTaskMenu,
+    public ContextMenu(InputStream input, OutputStream out, EditTaskMenu editTaskMenu,
                        hwr.oop.application.CreateTaskUseCase createTaskUseCase) {
-        this.input = input;
-        this.output = out;
+        this.input = new Scanner(input);
+        this.output = new PrintStream(out);
         this.editTaskMenu = editTaskMenu;
         this.createTaskUseCase = createTaskUseCase;
     }
