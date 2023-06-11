@@ -32,7 +32,7 @@ public class EditTaskMenu {
         } else if (choice.equals("2")) {
             editTaskContentInUser(task, user);
         } else if (choice.equals("3")) {
-            choseTaskState(task);
+            choseTaskState();
         } else if (choice.equals("4")) {
             editTaskDeadlineInUser(task, user);
         } else {
@@ -54,7 +54,7 @@ public class EditTaskMenu {
         } else if (choice.equals("2")) {
             editTaskContentInProject(task, project);
         } else if (choice.equals("3")) {
-            choseTaskState(task);
+            choseTaskState();
         } else if (choice.equals("4")) {
             editTaskDeadlineInProject(task, project);
         } else {
@@ -63,7 +63,7 @@ public class EditTaskMenu {
         }
     }
 
-    public TaskState choseTaskState(Task task) {
+    public TaskState choseTaskState() {
         output.print("What do you want to do?\n");
         output.print("Type 1 to set the task state to 'BACKLOG'.\n");
         output.print("Type 2 to set the task state to 'IN_PROGRESS'.\n");
@@ -81,7 +81,7 @@ public class EditTaskMenu {
             return TaskState.DONE;
         } else {
             output.println("Choice invalid. \n");
-            choseTaskState(task);
+            choseTaskState();
         }
         return null;
     }
@@ -99,7 +99,7 @@ public class EditTaskMenu {
     }
 
     public void editTaskStateInUser(Task task, User user) {
-        TaskState taskState = choseTaskState(task);
+        TaskState taskState = choseTaskState();
         changeTaskUseCase.changeTaskStateInUser(task, taskState, user);
     }
 
@@ -122,7 +122,7 @@ public class EditTaskMenu {
     }
 
     public void editTaskStateInProject(Task task, Project project) {
-        TaskState taskState = choseTaskState(task);
+        TaskState taskState = choseTaskState();
         changeTaskUseCase.changeTaskStateInProject(task, taskState, project);
     }
 
