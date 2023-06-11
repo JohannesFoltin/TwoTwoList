@@ -1,10 +1,9 @@
 package hwr.oop.userinterfaceTests;
 
-import hwr.oop.application.User;
-import hwr.oop.application.ValidateUserService;
-import hwr.oop.application.ValidateUserUseCase;
+import hwr.oop.application.*;
 import hwr.oop.persistence.AppData;
 import hwr.oop.persistence.LoadPort;
+import hwr.oop.persistence.SavePort;
 import hwr.oop.userinterface.Login;
 import hwr.oop.userinterface.MainMenu;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,13 +28,21 @@ class LoginTest {
     @Mock
     private MainMenu mainMenu;
     private ValidateUserUseCase validateUserUseCase;
+    private CreateUserUseCase createUserUseCase;
+    private SavePort savePort;
+
     @BeforeEach
     void setUp(){
         appDataMock = new AppData(new ArrayList<>(),new ArrayList<>());
         mainMenu = mock();
+        
         LoadPort loadPort = () -> appDataMock;
 
+        savePort = mock();
+
         validateUserUseCase = new ValidateUserService(loadPort);
+
+        createUserUseCase = new CreateUserService(savePort,loadPort);
     }
     @Test
     void startTestToMainMenu(){
@@ -44,12 +51,16 @@ class LoginTest {
         InputStream inputStream = createInputStreamForInput("1\nTest\n");
         OutputStream outputStream = new ByteArrayOutputStream();
 
-        Login login = new Login(inputStream,outputStream,mainMenu, validateUserUseCase);
+        Login login = new Login(inputStream,outputStream,mainMenu, validateUserUseCase, createUserUseCase);
 
         login.start();
 
-        String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
+        String output = outputStream.toString().strip(); //This is how you can get the result output (sadly the complete, not the last line!)
         verify(mainMenu).start(any());
+        assertThat(output).isEqualTo("What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:");
 
     }
     @Test
@@ -60,13 +71,39 @@ class LoginTest {
         InputStream inputStream = createInputStreamForInput("1\ntest\n1\nTest");
         OutputStream outputStream = new ByteArrayOutputStream();
 
-        Login login = new Login(inputStream,outputStream,mainMenu,validateUserUseCase);
+        Login login = new Login(inputStream,outputStream,mainMenu,validateUserUseCase, createUserUseCase);
 
         login.start();
 
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
         verify(mainMenu).start(any());
+        assertThat(output).isEqualTo("What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:\n" +
+                "Username not found\n" +
+                "What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter Username:\n");
 
+    }
+    @Test
+    void  startTestToCreateNewUserToMain(){
+        InputStream inputStream = createInputStreamForInput("2\nTest\n");
+        OutputStream outputStream = new ByteArrayOutputStream();
+
+        Login login = new Login(inputStream,outputStream,mainMenu,validateUserUseCase, createUserUseCase);
+
+        login.start();
+        String output = outputStream.toString();
+        verify(mainMenu).start(any());
+        verify(savePort).saveData(any());
+        assertThat(output).isEqualTo("What do you wanna do??????\n" +
+                "Type 1 to login\n" +
+                "Type 2 to register a new user\n" +
+                "Enter username for new user:\n" +
+                "New User created with name: Test");
     }
 
     private InputStream createInputStreamForInput(String input) {

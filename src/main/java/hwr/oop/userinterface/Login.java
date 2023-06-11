@@ -1,5 +1,6 @@
 package hwr.oop.userinterface;
 
+import hwr.oop.application.CreateUserUseCase;
 import hwr.oop.application.User;
 import hwr.oop.application.ValidateUserUseCase;
 import hwr.oop.persistence.UserNotInAppDataException;
@@ -15,17 +16,20 @@ public class Login {
     private final MainMenu mainMenu;
     private final ValidateUserUseCase validateUserUseCase;
 
-    public Login(InputStream input, OutputStream out, MainMenu mainMenu, ValidateUserUseCase validateUserUseCase) {
+    private  final CreateUserUseCase createUserUseCase;
+
+    public Login(InputStream input, OutputStream out, MainMenu mainMenu, ValidateUserUseCase validateUserUseCase, CreateUserUseCase createUserUseCase) {
         this.input = new Scanner(input);
         this.out = new PrintStream(out);
         this.mainMenu = mainMenu;
         this.validateUserUseCase = validateUserUseCase;
+        this.createUserUseCase = createUserUseCase;
     }
 
     public void start() {
-        out.println("What do you wanna do??????");
-        out.println("Type 1 to login");
-        out.println("Type 2 to register a new user");
+        out.print("What do you wanna do??????\n");
+        out.print("Type 1 to login\n");
+        out.print("Type 2 to register a new user\n");
         String choice = input.nextLine();
 
         if (choice.equals("1")) {
@@ -37,7 +41,7 @@ public class Login {
     }
 
     public void loginLogin() {
-        out.println("Enter Username:\n");
+        out.print("Enter Username:\n");
         String name = input.nextLine();
 
         User user;
@@ -45,13 +49,18 @@ public class Login {
             user = validateUserUseCase.validateUser(name);
             mainMenu.start(user);
         } catch (UserNotInAppDataException e) {
-            out.println("Username not found");
+            out.print("Username not found\n");
             start();
         }
     }
 
     public void registerUser() {
-        out.println("Enter username for new user:\n");
 
+        out.print("Enter username for new user:\n");
+        String name = input.nextLine();
+
+        User user = createUserUseCase.createUser(name);
+        out.print("New User created with name: " + name);
+        mainMenu.start(user);
     }
 }
