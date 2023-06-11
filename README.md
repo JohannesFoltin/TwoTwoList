@@ -9,7 +9,7 @@ This repository contains a student project created for an ongoing lecture on obj
 
 | Number | Feature                  | Implemented | Tested |
 |--------|--------------------------|:-----------:|:------:|
-| 1      | create/delete Project    |    - [ ]    | - [ ]  |
+| 1      | create/delete Project    |    - [x]    | - [x]  |
 | 2      | rename Project           |    - [ ]    | - [ ]  |
 | 3      | add/remove Task          |    - [x]    | - [x]  |
 | 4      | merge Project            |    - [ ]    | - [ ]  |
