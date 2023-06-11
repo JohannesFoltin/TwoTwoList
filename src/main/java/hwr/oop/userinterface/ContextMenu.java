@@ -58,9 +58,9 @@ public class ContextMenu {
         }
     }
     public void listTasks(List<Task> tasks) {
-        output.println("These are your tasks: \n");
+        output.print("These are your tasks: \n");
         for (int i = 0; i < tasks.size(); i++) {
-            output.println(i+1 + ": " + tasks.get(i).toString());
+            output.print(i+1 + ": " + tasks.get(i).getId().toString()+" "+tasks.get(i).getTitle()+"\n");
         }
     }
     public void createTask(User user){

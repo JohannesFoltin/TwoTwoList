@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +36,8 @@ class ContextMenuTest {
     void setUp(){
         appDataMock = new AppData(new ArrayList<>(),new ArrayList<>());
         List<Task> tasks= new ArrayList<>();
-        tasks.add(new Task(UUID.randomUUID(),"Title","content",TaskState.DONE,null));
+        UUID id0 = UUID.fromString("41340433-7709-40d8-99c5-c576309f690a");
+        tasks.add(new Task(id0,"Title","content",TaskState.DONE,null));
         User user=new User(UUID.randomUUID(),"Test",null, tasks);
         appDataMock.getUserList().add(user);
         editTaskMenu = mock();
@@ -86,6 +88,16 @@ class ContextMenuTest {
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
         assertThat(appDataMock.getUserList().get(0).getContextList().contains(task)).isEqualTo(false);
 
+    }
+    @Test
+    void listTaskTest() {
+        OutputStream outputStream = new ByteArrayOutputStream();
+        ContextMenu contextMenu = new ContextMenu(createInputStreamForInput(""), outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
+
+        contextMenu.listTasks(appDataMock.getUserList().get(0).getContextList());
+        assertThat(outputStream.toString()).isEqualTo(
+                "These are your tasks: \n" +
+                        "1: 41340433-7709-40d8-99c5-c576309f690a Title\n");
     }
 
 
