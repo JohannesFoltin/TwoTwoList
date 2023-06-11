@@ -10,20 +10,19 @@ import java.util.Scanner;
 public class AddTaskToProjectMenu {
     private final Scanner input;
     private final PrintStream output;
-    private final AddTaskToProjectUseCase addTaskToProjectUseCase;
     private final EditProjectMenu editProjectMenu;
     private final CreateTaskUseCase createTaskUseCase;
 
-    public AddTaskToProjectMenu(Scanner input, PrintStream output, AddTaskToProjectUseCase addTaskToProjectUseCase,
-                                EditProjectMenu editProjectMenu, CreateTaskUseCase createTaskUseCase) {
+    public AddTaskToProjectMenu(Scanner input, PrintStream output, EditProjectMenu editProjectMenu,
+                                CreateTaskUseCase createTaskUseCase) {
         this.input = input;
         this.output = output;
-        this.addTaskToProjectUseCase = addTaskToProjectUseCase;
         this.editProjectMenu = editProjectMenu;
         this.createTaskUseCase = createTaskUseCase;
     }
 
     public void start(Project project, User user) {
+        checkPermission(project, user);
         output.println("What do you want to name your task? \n");
         String title = input.nextLine();
         output.println("Add content of your new task: \n");
@@ -33,9 +32,16 @@ public class AddTaskToProjectMenu {
         Optional<LocalDateTime> deadline = chooseDeadline(project);
 
         if (deadline.isEmpty()) {
-            createTask(title, content, state);
+            createTaskUseCase.createTaskInProject(title, content, state, null, project);
         } else {
-            createTask(title, content, state, deadline.get());
+            createTaskUseCase.createTaskInProject(title, content, state, deadline.get(), project);
+        }
+    }
+
+    private void checkPermission(Project project, User user) {
+        if (!project.getPermissions().containsKey(user) || project.getPermissions().get(user).equals(Boolean.FALSE)) {
+            output.println("You do not have the necessary permissions to add a Task to this Project");
+            editProjectMenu.start(user, project);
         }
     }
 
@@ -71,14 +77,5 @@ public class AddTaskToProjectMenu {
             output.println("Invalid input, please try again. \n");
             return chooseTaskState(project);
         }
-    }
-
-
-    private void createTask(String title, String content, TaskState state) {
-
-    }
-
-    private void createTask(String title, String content, TaskState state, LocalDateTime deadline) {
-
     }
 }
