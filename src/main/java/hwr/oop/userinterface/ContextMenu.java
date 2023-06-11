@@ -29,10 +29,10 @@ public class ContextMenu {
     public void start(User user) {
         List<Task> contextlist= user.getContextList();
         listTasks(contextlist);
-        output.println("What do you want to do?");
-        output.println("Type 1 to create a new Task");
-        output.println("Type 2 to delete a Task");
-        output.println("Type 3 to edit a Task");
+        output.print("What do you want to do\n");
+        output.print("Type 1 to create a new Task\n");
+        output.print("Type 2 to delete a Task\n");
+        output.print("Type 3 to edit a Task\n");
         String choice = input.nextLine();
 
         if (choice.equals("1")) {
