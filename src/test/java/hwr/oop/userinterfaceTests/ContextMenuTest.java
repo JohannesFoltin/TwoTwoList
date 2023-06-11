@@ -70,7 +70,7 @@ class ContextMenuTest {
         ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
         User user = appDataMock.getUserList().get(0);
         contextMenu.start(user);
-        assertThat(outputStream).isEqualTo(
+        assertThat(outputStream.toString()).hasToString(
         "These are your tasks: \n" +
                 "1: 41340433-7709-40d8-99c5-c576309f690a Title\n" +
                 "What do you want to do\n" +
@@ -111,7 +111,7 @@ class ContextMenuTest {
         contextMenu.start(user);
 
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
-        assertThat(appDataMock.getUserList().get(0).getContextList().contains(task)).isEqualTo(false);
+        assertThat(appDataMock.getUserList().get(0).getContextList().contains(task)).isFalse();
 
     }
     @Test
@@ -120,7 +120,7 @@ class ContextMenuTest {
         ContextMenu contextMenu = new ContextMenu(createInputStreamForInput(""), outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
 
         contextMenu.listTasks(appDataMock.getUserList().get(0).getContextList());
-        assertThat(outputStream.toString()).isEqualTo(
+        assertThat(outputStream.toString()).hasToString(
                 "These are your tasks: \n" +
                         "1: 41340433-7709-40d8-99c5-c576309f690a Title\n");
     }
