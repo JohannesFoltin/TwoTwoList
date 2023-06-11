@@ -13,7 +13,7 @@ This repository contains a student project created for an ongoing lecture on obj
 | 2      | rename Project           |    - [ ]    | - [ ]  |
 | 3      | add/remove Task          |    - [x]    | - [x]  |
 | 4      | merge Project            |    - [ ]    | - [ ]  |
-| 5      | Project Modifier Access  |    - [ ]    | - [ ]  |
+| 5      | Project Modifier Access  |    - [x]    | - [x]  |
 | 6      | create/delete Task       |    - [ ]    | - [ ]  |
 | 7      | modify Task Attributes   |    - [ ]    | - [ ]  |
 | 8      | edit Task State          |    - [ ]    | - [ ]  |
@@ -27,5 +27,4 @@ This repository contains a student project created for an ongoing lecture on obj
 
 | Number | Dependency Name | Dependency Description | Why is it necessary? |
 |--------|-----------------|------------------------|----------------------|
-| 1      | Gson | (de-)serialization of data from and to JSON | persistenceImplementation |
-| 1      | Gson            | Can be used to convert Java Objects into their JSON representation.                                     | Persistence          |
+| 1      | Gson            | Can be used to convert Java Objects into their JSON representation.| Persistence |

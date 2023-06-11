@@ -10,6 +10,7 @@ public class Project {
     private List<Task> taskList;
     private String title;
     private Map<User, Boolean> permissions;
+
     public Project(UUID id, List<Task> taskList, String title, Map<User, Boolean> permissions) {
         this.id = id;
         this.taskList = taskList;
@@ -35,6 +36,12 @@ public class Project {
 
     public void changeTitle(String newTitle){
         title = newTitle;
+    }
+    public void changePermission(User user, Boolean permission){
+            permissions.put(user, permission);
+    }
+    public void removePermissionUser(User user){
+        permissions.remove(user);
     }
 
     public void addTask(Task task) {
