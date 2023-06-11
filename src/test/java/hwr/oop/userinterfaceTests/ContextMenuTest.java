@@ -46,10 +46,10 @@ class ContextMenuTest {
         createTaskUseCase = new CreateTaskService(loadPort, savePort);
     }
     @Test
-    void startTestToMainMenu(){
+    void startTestToEditTaskMenu(){
         appDataMock.getUserList().add(new User(UUID.randomUUID(),"Test",null,null));
 
-        InputStream inputStream = createInputStreamForInput("1\nTest\n");
+        InputStream inputStream = createInputStreamForInput("3\n");
         OutputStream outputStream = new ByteArrayOutputStream();
 
         ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase);
@@ -60,22 +60,7 @@ class ContextMenuTest {
         verify(editTaskMenu).start();
 
     }
-    /*@Test
-    void startTestToMainMenu_Exception(){
-
-        appDataMock.getUserList().add(new User(UUID.randomUUID(),"Test",null,null));
-
-        InputStream inputStream = createInputStreamForInput("1\ntest\n1\nTest");
-        OutputStream outputStream = new ByteArrayOutputStream();
-
-        Login login = new Login(inputStream,outputStream,mainMenu,validateUserUseCase);
-
-        login.start();
-
-        String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
-        verify(mainMenu).start(any());
-
-    }*/
+    
 
     private InputStream createInputStreamForInput(String input) {
         byte[] inputInBytes = input.getBytes();
