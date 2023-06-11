@@ -34,10 +34,10 @@ public class ProjectMenu {
         List<Project> projects = getProjectsOfUserUseCase.getProjects(user);
         listProjects(projects);
 
-        output.println("What do you want to do? \n");
-        output.println("Type 1 to edit a Project \n");
-        output.println("Type 2 to create a new Project \n");
-        output.println("Type 3 to delete a Project \n");
+        output.print("What do you want to do? \n\n");
+        output.print("Type 1 to edit a Project \n\n");
+        output.print("Type 2 to create a new Project \n\n");
+        output.print("Type 3 to delete a Project \n\n");
         String choice = input.nextLine();
 
         if (choice.equals("1")) {
@@ -47,23 +47,23 @@ public class ProjectMenu {
         } else if (choice.equals("3")) {
             deleteProject(projects, user);
         } else {
-            output.println("Choice invalid. \n");
+            output.print("Choice invalid. \n\n");
             start(user);
         }
     }
 
     public void listProjects(List<Project> projects) {
-        output.println("These are your projects: \n");
+        output.print("These are your projects: \n\n");
         for (int i = 0; i < projects.size(); i++) {
-            output.println(i+1 + ": " + projects.get(i).toString());
+            output.print(i+1 + ": " + projects.get(i).toString()+"\n");
         }
     }
 
     public Project chooseProject(List<Project> projects) {
-        output.println("Which project? (1 - " + projects.size() + ") \n");
+        output.print("Which project? (1 - " + projects.size() + ") \n\n");
         String choice = input.nextLine();
         if (Integer.parseInt(choice) < 1 || Integer.parseInt(choice) > projects.size()) {
-            output.println("Invalid Choice. \n");
+            output.print("Invalid Choice. \n\n");
             return chooseProject(projects);
         } else {
             return projects.get(Integer.parseInt(choice) - 1);
@@ -74,7 +74,7 @@ public class ProjectMenu {
         Project toBeDeleted = chooseProject(projects);
         if (!toBeDeleted.getPermissions().containsKey(user) ||
                 toBeDeleted.getPermissions().get(user).equals(Boolean.FALSE)) {
-            output.println("You do not have the necessary permissions to delete this Project. \n");
+            output.print("You do not have the necessary permissions to delete this Project. \n\n");
             start(user);
         } else {
             deleteProjectUseCase.deleteProject(toBeDeleted);
@@ -85,7 +85,7 @@ public class ProjectMenu {
         Project toBeEdited = chooseProject(projects);
         if (!toBeEdited.getPermissions().containsKey(user) ||
                 toBeEdited.getPermissions().get(user).equals(Boolean.FALSE)) {
-            output.println("You do not have the necessary permissions to edit this Project. \n");
+            output.print("You do not have the necessary permissions to edit this Project. \n\n");
             start(user);
         } else {
             editProjectMenu.start(user, toBeEdited);
