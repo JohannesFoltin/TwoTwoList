@@ -156,7 +156,7 @@ class ProjectMenuTest {
 
         user = RandomTestData.getRandomUser();
         projectMenu.editProject(projects, user);
-        verify(editProjectMenu, never()).start();
+        verify(editProjectMenu, never()).start(any(), any());
         assertThat(outputStream.toString()).hasToString("Which project? (1 - 3) \n" +
                 "\n" +
                 "You do not have the necessary permissions to edit this Project. \n" +
@@ -179,7 +179,7 @@ class ProjectMenuTest {
                 listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
         projectMenu.editProject(projects, user);
-        verify(editProjectMenu).start();
+        verify(editProjectMenu).start(user,projects.get(1));
         assertThat(outputStream.toString()).hasToString("Which project? (1 - 3) \n" +
                 "\n");
     }

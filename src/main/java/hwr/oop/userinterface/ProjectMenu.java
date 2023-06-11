@@ -88,7 +88,7 @@ public class ProjectMenu {
             output.println("You do not have the necessary permissions to edit this Project. \n");
             start(user);
         } else {
-            editProjectMenu.start();
+            editProjectMenu.start(user, toBeEdited);
         }
     }
 
