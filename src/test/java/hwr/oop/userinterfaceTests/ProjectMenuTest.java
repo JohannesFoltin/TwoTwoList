@@ -1,7 +1,7 @@
 package hwr.oop.userinterfaceTests;
 
 import hwr.oop.application.DeleteProjectUseCase;
-import hwr.oop.application.ListProjectsOfUserUseCase;
+import hwr.oop.application.GetProjectsOfUserUseCase;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;
 import hwr.oop.applicationTest.RandomTestData;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ProjectMenuTest {
     @Mock
-    ListProjectsOfUserUseCase listProjectsOfUserUseCase;
+    GetProjectsOfUserUseCase getProjectsOfUserUseCase;
     @Mock
     DeleteProjectUseCase deleteProjectUseCase;
     @Mock
@@ -64,7 +64,7 @@ class ProjectMenuTest {
 
     @Test
     void listProjectsTest() {
-        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput(""), outputStream, listProjectsOfUserUseCase,
+        ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput(""), outputStream, getProjectsOfUserUseCase,
                 deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
         projectMenu.listProjects(projects);
@@ -79,7 +79,7 @@ class ProjectMenuTest {
     @Test
     void chooseProjectUnsuccessfullyOnce_then3Test() {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("0\n3\n"), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
         Project project = projectMenu.chooseProject(projects);
 
         assertThat(outputStream.toString()).hasToString("Which project? (1 - 3) \n" +
@@ -94,7 +94,7 @@ class ProjectMenuTest {
     @Test
     void chooseProjectUnsuccessfullyOnce_then1Test() {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("8\n1\n"), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
         Project project = projectMenu.chooseProject(projects);
 
         assertThat(outputStream.toString()).hasToString("Which project? (1 - 3) \n" +
@@ -109,7 +109,7 @@ class ProjectMenuTest {
     @Test
     void deleteProjectWithPermissionsTest() {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n"), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
         projectMenu.deleteProject(projects, user);
         verify(deleteProjectUseCase).deleteProject(any());
@@ -118,7 +118,7 @@ class ProjectMenuTest {
     @Test
     void deleteProjectWithoutPermission() {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n2\n"), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
         projectMenu.deleteProject(projects, RandomTestData.getRandomUser());
 
@@ -143,7 +143,7 @@ class ProjectMenuTest {
     @Test
     void createProjectTest() {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput(""), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
         projectMenu.createProject(user);
         verify(createProjectMenu).start(user);
@@ -152,7 +152,7 @@ class ProjectMenuTest {
     @Test
     void editProjectWithoutPermissionTest() {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n2\n"), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
         user = RandomTestData.getRandomUser();
         projectMenu.editProject(projects, user);
@@ -176,7 +176,7 @@ class ProjectMenuTest {
     @Test
     void editProjectWithPermissions(){
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n"), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
         projectMenu.editProject(projects, user);
         verify(editProjectMenu).start(user,projects.get(1));
@@ -188,9 +188,9 @@ class ProjectMenuTest {
     @ValueSource(strings = {"7\n1\n2\n", "7\n3\n2\n"})
     void startUnsuccessfullyOnce(String input) {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput(input), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
-        when(listProjectsOfUserUseCase.listProjects(any())).thenReturn(projects);
+        when(getProjectsOfUserUseCase.getProjects(any())).thenReturn(projects);
         projectMenu.start(user);
 
         assertThat(outputStream.toString()).hasToString("These are your projects: \n" +
@@ -228,9 +228,9 @@ class ProjectMenuTest {
     @Test
     void startThenCreateProjectTest() {
         ProjectMenu projectMenu = new ProjectMenu(createInputStreamForInput("2\n"), outputStream,
-                listProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
+                getProjectsOfUserUseCase, deleteProjectUseCase, editProjectMenu, createProjectMenu);
 
-        when(listProjectsOfUserUseCase.listProjects(any())).thenReturn(projects);
+        when(getProjectsOfUserUseCase.getProjects(any())).thenReturn(projects);
         projectMenu.start(user);
 
         assertThat(outputStream.toString()).hasToString("These are your projects: \n" +

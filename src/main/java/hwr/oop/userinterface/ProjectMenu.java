@@ -1,7 +1,7 @@
 package hwr.oop.userinterface;
 
 import hwr.oop.application.DeleteProjectUseCase;
-import hwr.oop.application.ListProjectsOfUserUseCase;
+import hwr.oop.application.GetProjectsOfUserUseCase;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;
 import java.io.InputStream;
@@ -14,24 +14,24 @@ public class ProjectMenu {
 
     private final Scanner input;
     private final PrintStream output;
-    private final ListProjectsOfUserUseCase listProjectsOfUserUseCase;
+    private final GetProjectsOfUserUseCase getProjectsOfUserUseCase;
     private final DeleteProjectUseCase deleteProjectUseCase;
     private final EditProjectMenu editProjectMenu;
     private final CreateProjectMenu createProjectMenu;
 
-    public ProjectMenu(InputStream input, OutputStream output, ListProjectsOfUserUseCase listProjectsOfUserUseCase,
+    public ProjectMenu(InputStream input, OutputStream output, GetProjectsOfUserUseCase getProjectsOfUserUseCase,
                        DeleteProjectUseCase deleteProjectUseCase, EditProjectMenu editProjectMenu,
                        CreateProjectMenu createProjectMenu) {
         this.input = new Scanner(input);
         this.output = new PrintStream(output);
-        this.listProjectsOfUserUseCase = listProjectsOfUserUseCase;
+        this.getProjectsOfUserUseCase = getProjectsOfUserUseCase;
         this.deleteProjectUseCase = deleteProjectUseCase;
         this.editProjectMenu = editProjectMenu;
         this.createProjectMenu = createProjectMenu;
     }
 
     public void start(User user) {
-        List<Project> projects = listProjectsOfUserUseCase.listProjects(user);
+        List<Project> projects = getProjectsOfUserUseCase.getProjects(user);
         listProjects(projects);
 
         output.println("What do you want to do? \n");

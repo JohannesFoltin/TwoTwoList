@@ -1,6 +1,6 @@
 package hwr.oop.applicationTest;
 
-import hwr.oop.application.ListProjectsOfUserService;
+import hwr.oop.application.GetProjectsOfUserService;
 import hwr.oop.application.Project;
 import hwr.oop.application.User;
 import hwr.oop.persistence.AppData;
@@ -19,7 +19,7 @@ class ListProjectsOfUserTest {
     LoadPort load;
     SavePort save;
     AppData appData;
-    ListProjectsOfUserService service;
+    GetProjectsOfUserService service;
     List<Project> projects;
     User user;
 
@@ -28,7 +28,7 @@ class ListProjectsOfUserTest {
         load = new PersistenceAdapter("./OOPTest/");
         save = new PersistenceAdapter("./OOPTest/");
         appData = new AppData(new ArrayList<>(), new ArrayList<>());
-        service = new ListProjectsOfUserService(load);
+        service = new GetProjectsOfUserService(load);
 
         projects = new ArrayList<>();
         user = RandomTestData.getRandomUser();
@@ -45,6 +45,6 @@ class ListProjectsOfUserTest {
         }
         save.saveData(appData);
 
-        assertThat(service.listProjects(user)).isEqualTo(load.loadAllUserProjects(user.getId()));
+        assertThat(service.getProjects(user)).isEqualTo(load.loadAllUserProjects(user.getId()));
     }
 }
