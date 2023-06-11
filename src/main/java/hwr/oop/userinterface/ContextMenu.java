@@ -42,18 +42,18 @@ public class ContextMenu {
         } else if (choice.equals("3")) {
             editTask(contextlist, user);
         } else {
-            output.println("Choice invalid. \n");
+            output.print("Choice invalid. \n");
             start(user);
         }
     }
     public void editTask(List<Task> contextlist, User user){
-        output.println("Please choose the number of the task you want to edit");
+        output.print("Please choose the number of the task you want to edit \n");
         Integer taskNumber = Integer.parseInt(input.nextLine());
         if (contextlist.size()>=taskNumber){
             editTaskMenu.startWithUser(contextlist.get(taskNumber),user);
         }
         else{
-            output.println("Invalid Number");
+            output.print("Invalid Number \n");
             editTask(contextlist, user);
         }
     }
@@ -64,16 +64,16 @@ public class ContextMenu {
         }
     }
     public void createTask(User user){
-        output.println("Please enter a title for your Task\n");
+        output.print("Please enter a title for your Task \n");
         String title= input.nextLine();
-        output.println("Please enter the content for your Task\n");
+        output.print("Please enter the content for your Task \n");
         String content= input.nextLine();
         TaskState taskState =taskStateChoice();
         LocalDateTime deadline= deadline();
         createTaskUseCase.createTaskInContextList(title,content, taskState, deadline, user);
     }
     LocalDateTime deadline(){
-        output.println("Please enter a deadline for the Task in the format yyyy-mm-dd HH:MM\n");
+        output.print("Please enter a deadline for the Task in the format yyyy-mm-dd HH:MM \n");
         String date= input.nextLine();
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -83,10 +83,10 @@ public class ContextMenu {
         }
     }
     TaskState taskStateChoice(){
-        output.println("Please enter the state your Task is in");
-        output.println("Type 1 if your Task is in backlog");
-        output.println("Type 2 if your Task is in progress");
-        output.println("Type 3 if your Task is in review\n");
+        output.print("Please enter the state your Task is in\n");
+        output.print("Type 1 if your Task is in backlog\n");
+        output.print("Type 2 if your Task is in progress\n");
+        output.print("Type 3 if your Task is in review\n");
         String choice = input.nextLine();
         if (choice.equals("1")) {
             return TaskState.BACKLOG;
@@ -95,19 +95,19 @@ public class ContextMenu {
         } else if (choice.equals("3")) {
             return TaskState.IN_REVIEW;
         } else {
-            output.println("Choice invalid. \n");
+            output.print("Choice invalid. \n");
             return taskStateChoice();
         }
     }
     public void deleteTask(List<Task> taskList, User user){
-        output.println("Please choose the number of the task you want to delete");
+        output.print("Please choose the number of the task you want to delete\n");
         Integer taskNumber = Integer.parseInt(input.nextLine());
         if (taskList.size()>=taskNumber){
             Task task = taskList.get(taskNumber-1);
             deleteTaskUseCase.deleteTaskFromContextList(task, user);
         }
         else{
-            output.println("Invalid Number");
+            output.print("Invalid Number\n");
             deleteTask(taskList,user);
         }
 

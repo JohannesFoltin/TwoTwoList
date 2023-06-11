@@ -64,12 +64,27 @@ class ContextMenuTest {
     }
     @Test
     void startTestUnsuccessfully(){
-        InputStream inputStream = createInputStreamForInput("5\n");
+        InputStream inputStream = createInputStreamForInput("5\n3\n0\n");
         OutputStream outputStream = new ByteArrayOutputStream();
 
         ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
         User user = appDataMock.getUserList().get(0);
         contextMenu.start(user);
+        assertThat(outputStream).isEqualTo(
+        "These are your tasks: \n" +
+                "1: 41340433-7709-40d8-99c5-c576309f690a Title\n" +
+                "What do you want to do\n" +
+                "Type 1 to create a new Task\n" +
+                "Type 2 to delete a Task\n" +
+                "Type 3 to edit a Task\n" +
+                "Choice invalid. \n" +
+                "These are your tasks: \n" +
+                "1: 41340433-7709-40d8-99c5-c576309f690a Title\n" +
+                "What do you want to do\n" +
+                "Type 1 to create a new Task\n" +
+                "Type 2 to delete a Task\n" +
+                "Type 3 to edit a Task\n" +
+                "Please choose the number of the task you want to edit\n");
 
     }
     @Test

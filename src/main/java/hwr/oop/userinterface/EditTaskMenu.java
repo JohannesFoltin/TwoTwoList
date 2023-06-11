@@ -58,7 +58,7 @@ public class EditTaskMenu {
             editTaskDeadline(task);
         } else {
             output.println("Choice invalid. \n");
-            start(task);
+            //start(task);
         }
     }
 
