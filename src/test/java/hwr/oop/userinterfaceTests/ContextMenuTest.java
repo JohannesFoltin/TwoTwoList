@@ -59,7 +59,7 @@ class ContextMenuTest {
         contextMenu.start(user);
 
         String output = outputStream.toString(); //This is how you can get the result output (sadly the complete, not the last line!)
-        verify(editTaskMenu).start(any());
+        verify(editTaskMenu).startWithUser(any(),any());
 
     }
     @Test

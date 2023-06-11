@@ -40,21 +40,21 @@ public class ContextMenu {
         } else if (choice.equals("2")) {
             deleteTask(contextlist,user);
         } else if (choice.equals("3")) {
-            editTask(contextlist);
+            editTask(contextlist, user);
         } else {
             output.println("Choice invalid. \n");
             start(user);
         }
     }
-    public void editTask(List<Task> contextlist){
+    public void editTask(List<Task> contextlist, User user){
         output.println("Please choose the number of the task you want to edit");
         Integer taskNumber = Integer.parseInt(input.nextLine());
         if (contextlist.size()>=taskNumber){
-            editTaskMenu.start(contextlist.get(taskNumber));
+            editTaskMenu.startWithUser(contextlist.get(taskNumber),user);
         }
         else{
             output.println("Invalid Number");
-            editTask(contextlist);
+            editTask(contextlist, user);
         }
     }
     public void listTasks(List<Task> tasks) {
