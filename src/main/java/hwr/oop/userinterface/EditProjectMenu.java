@@ -31,7 +31,7 @@ public class EditProjectMenu {
 
     public void start(User user, Project project) {
         listTasks(project);
-        output.println("What do you want to do?");
+        output.println("What do you want to do? \n");
         output.println("Type 1 to edit a task from this project.");
         output.println("Type 2 to add a new task to this project.");
         output.println("Type 3 to delete a task from this project.");
@@ -80,5 +80,6 @@ public class EditProjectMenu {
         for (int i=0; i<project.getTaskList().size(); i++) {
             output.println(i+1 + " " + project.getTaskList().get(i));
         }
+        output.println("\n");
     }
 }
