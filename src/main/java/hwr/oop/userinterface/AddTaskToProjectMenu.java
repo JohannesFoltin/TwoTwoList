@@ -2,6 +2,8 @@ package hwr.oop.userinterface;
 
 import hwr.oop.application.*;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -13,10 +15,10 @@ public class AddTaskToProjectMenu {
     private final EditProjectMenu editProjectMenu;
     private final CreateTaskUseCase createTaskUseCase;
 
-    public AddTaskToProjectMenu(Scanner input, PrintStream output, EditProjectMenu editProjectMenu,
+    public AddTaskToProjectMenu(InputStream input, OutputStream output, EditProjectMenu editProjectMenu,
                                 CreateTaskUseCase createTaskUseCase) {
-        this.input = input;
-        this.output = output;
+        this.input = new Scanner(input);
+        this.output = new PrintStream(output);
         this.editProjectMenu = editProjectMenu;
         this.createTaskUseCase = createTaskUseCase;
     }
