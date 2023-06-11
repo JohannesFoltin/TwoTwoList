@@ -25,8 +25,8 @@ class ListProjectsOfUserTest {
 
     @BeforeEach
     void setUp() {
-        load = new PersistenceAdapter("./OOPTest");
-        save = new PersistenceAdapter("./OOPTest");
+        load = new PersistenceAdapter("./OOPTest/");
+        save = new PersistenceAdapter("./OOPTest/");
         appData = new AppData(new ArrayList<>(), new ArrayList<>());
         service = new ListProjectsOfUserService(load);
 
