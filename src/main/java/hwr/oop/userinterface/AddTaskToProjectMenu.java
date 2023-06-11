@@ -42,7 +42,7 @@ public class AddTaskToProjectMenu {
 
     private void checkPermission(Project project, User user) {
         if (!project.getPermissions().containsKey(user) || project.getPermissions().get(user).equals(Boolean.FALSE)) {
-            output.println("You do not have the necessary permissions to add a Task to this Project");
+            output.println("You do not have the necessary permissions to add a task to this project");
             editProjectMenu.start(user, project);
         }
     }
