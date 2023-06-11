@@ -28,8 +28,16 @@ public class EditProjectPermissionsMenu {
     public void start(Project project, User user) {
         checkPermissions(project, user);
         output.println("What do you want to do? ");
-        output.println("Type 1 to edit or delete a");
-        User toBeEdited = chooseUser(project, user);
+        output.println("Type 1 to edit or delete an already existing permission. ");
+        output.println("Type 2 to add a new Permission. \n");
+        String choice = input.nextLine();
+        if (choice.equals("1")) {
+            User toBeEdited = chooseUser(project, user);
+            changePermission(project, toBeEdited);
+        } else {
+            changePermission(project);
+        }
+
     }
 
     void checkPermissions(Project project, User user) {
@@ -58,5 +66,13 @@ public class EditProjectPermissionsMenu {
                 return userList.get(Integer.parseInt(choice));
             }
         }
+    }
+
+    private void changePermission(Project project, User toBeEdited) {
+
+    }
+
+    private void changePermission(Project project) {
+
     }
 }
