@@ -12,6 +12,7 @@ import hwr.oop.application.User;
 public class EditTaskMenu {
     private final Scanner input;
     private final PrintStream output;
+    private final Change
 
     public EditTaskMenu(InputStream input, OutputStream output) {
         this.input = new Scanner(input);
@@ -19,11 +20,11 @@ public class EditTaskMenu {
     }
 
     public void start(Task task) {
-        output.println("What do you wanna do??????");
-        output.println("Type 1 to edit the task title");
-        output.println("Type 2 to edit the task content");
-        output.println("Type 3 to edit the task state");
-        output.println("Type 4 to edit the task deadline");
+        output.println("What do you want to do?");
+        output.println("Type 1 to edit the task title.");
+        output.println("Type 2 to edit the task content.");
+        output.println("Type 3 to edit the task state.");
+        output.println("Type 4 to edit the task deadline.");
         String choice = input.nextLine();
 
         if (choice.equals("1")) {
@@ -40,25 +41,25 @@ public class EditTaskMenu {
         }
     }
 
-    public Task editTaskTitle(Task task) {
+    public void editTaskTitle(Task task) {
         output.println("Please enter a new title for your Task\n");
         String title = input.nextLine();
         // ...
     }
 
-    public Task editTaskContent(Task task) {
+    public void editTaskContent(Task task) {
         output.println("Please enter a new content for your Task\n");
         String content = input.nextLine();
         // ...
     }
 
-    public Task editTaskState(Task task) {
+    public void editTaskState(Task task) {
         output.println("Please enter a new state for your Task\n");
         String state = input.nextLine();
         // ...
     }
 
-    public Task editTaskDeadline(Task task) {
+    public void editTaskDeadline(Task task) {
         output.println("Please enter a new deadline for your Task\n");
         String deadline = input.nextLine();
         // ...

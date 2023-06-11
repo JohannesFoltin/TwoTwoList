@@ -19,7 +19,7 @@ public class ChangeTitleTest {
 
     private LoadPort loadPort;
     private MySavePort savePort;
-    private ChangeTitleService changeTitleService;
+    private ChangeProjectTitleService changeTitleService;
     AppData appDataMock;
     @BeforeEach
     void setUp() {
@@ -37,7 +37,7 @@ public class ChangeTitleTest {
         loadPort = () -> appDataMock;
         savePort = new MySavePort();
 
-        changeTitleService = new ChangeTitleService(loadPort, savePort);
+        changeTitleService = new ChangeProjectTitleService(loadPort, savePort);
     }
     private class MySavePort implements SavePort {
         private boolean flag = false;

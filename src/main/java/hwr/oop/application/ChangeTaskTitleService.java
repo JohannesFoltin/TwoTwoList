@@ -3,25 +3,26 @@ import hwr.oop.persistence.AppData;
 import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 
-public class ChangeTitleService implements ChangeTitleUseCase {
+public class ChangeTaskTitleService implements ChangeTaskTitleUseCase {
     private final LoadPort loadPort;
     private final SavePort savePort;
 
-    public ChangeTitleService(LoadPort loadPort, SavePort savePort) {
+    public ChangeTaskTitleService(LoadPort loadPort, SavePort savePort) {
         this.loadPort = loadPort;
         this.savePort = savePort;
     }
 
     @Override
-    public void changeTitle(Project project, String newTitle){
-        int ind =loadPort.loadData().getProjectList().indexOf(project);
+    public void changeTitle(Task task, String newTitle){
+        int ind =loadPort.loadData().getTaskList().indexOf(task);
         if(ind>=0){
             AppData appData= loadPort.loadData();
-            appData.getProjectList().get(ind).changeTitle(newTitle);
+            appData.getTaskList().get(ind).changeTitle(newTitle);
             savePort.saveData(appData);
         }
         else{
-            throw new ChangeTitleException("Project not found");
+            throw new ChangeTitleException("Task not found");
         }
     }
+    
 }
