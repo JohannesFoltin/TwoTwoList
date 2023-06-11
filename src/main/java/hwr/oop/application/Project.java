@@ -28,6 +28,7 @@ public class Project {
     public Map<User, Boolean> getPermissions() {
         return permissions;
     }
+
     public void changePermission(User user, Boolean permission){
             permissions.put(user, permission);
     }
@@ -39,6 +40,13 @@ public class Project {
             throw new CanNotFindUserToRemove("user not found");
         }
     }
+
+
+    public void changeTitle(String newTitle){
+        title = newTitle;
+    }
+
+
     private final UUID id;
     private List<Task> taskList;
     private String title;
