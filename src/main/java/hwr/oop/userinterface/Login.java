@@ -51,7 +51,8 @@ public class Login {
     }
 
     public void registerUser() {
-        out.println("Enter username for new user:\n");
+        out.print("Enter username for new user:\n");
+
 
     }
 }
