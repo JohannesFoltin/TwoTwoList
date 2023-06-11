@@ -1,9 +1,6 @@
 package hwr.oop.userinterface;
 
-import hwr.oop.application.CreateTaskUseCase;
-import hwr.oop.application.Task;
-import hwr.oop.application.TaskState;
-import hwr.oop.application.User;
+import hwr.oop.application.*;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,13 +16,15 @@ public class ContextMenu {
     private final PrintStream output;
     private final EditTaskMenu editTaskMenu;
     private final CreateTaskUseCase createTaskUseCase;
+    private final DeleteTaskUseCase deleteTaskUseCase;
 
     public ContextMenu(InputStream input, OutputStream out, EditTaskMenu editTaskMenu,
-                       hwr.oop.application.CreateTaskUseCase createTaskUseCase) {
+                       CreateTaskUseCase createTaskUseCase, DeleteTaskUseCase deleteTaskUseCase) {
         this.input = new Scanner(input);
         this.output = new PrintStream(out);
         this.editTaskMenu = editTaskMenu;
         this.createTaskUseCase = createTaskUseCase;
+        this.deleteTaskUseCase = deleteTaskUseCase;
     }
     public void start(User user) {
         List<Task> contextlist= user.getContextList();
@@ -39,7 +38,7 @@ public class ContextMenu {
         if (choice.equals("1")) {
             createTask(user);
         } else if (choice.equals("2")) {
-            deleteTask();
+            deleteTask(contextlist,user);
         } else if (choice.equals("3")) {
             editTaskMenu.start();
         } else {
@@ -89,7 +88,17 @@ public class ContextMenu {
             return taskStateChoice();
         }
     }
-    public void deleteTask(){
+    public void deleteTask(List<Task> taskList, User user){
+        output.println("Please choose the number of the task you want to delete");
+        Integer taskNumber = Integer.parseInt(input.nextLine());
+        if (taskList.size()>=taskNumber){
+            Task task = taskList.get(taskNumber-1);
+            deleteTaskUseCase.deleteTaskFromContextList(task, user);
+        }
+        else{
+            output.println("Invalid Number");
+            deleteTask(taskList,user);
+        }
 
     }
 }

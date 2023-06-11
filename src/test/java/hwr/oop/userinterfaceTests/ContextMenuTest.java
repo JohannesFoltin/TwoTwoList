@@ -6,8 +6,6 @@ import hwr.oop.persistence.LoadPort;
 import hwr.oop.persistence.SavePort;
 import hwr.oop.userinterface.ContextMenu;
 import hwr.oop.userinterface.EditTaskMenu;
-import hwr.oop.userinterface.Login;
-import hwr.oop.userinterface.MainMenu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +30,7 @@ class ContextMenuTest {
     private EditTaskMenu editTaskMenu;
     private MySavePort savePort;
     private CreateTaskUseCase  createTaskUseCase;
+    private DeleteTaskUseCase deleteTaskUseCase;
     @BeforeEach
     void setUp(){
         appDataMock = new AppData(new ArrayList<>(),new ArrayList<>());
@@ -44,6 +43,8 @@ class ContextMenuTest {
         savePort = new MySavePort();
 
         createTaskUseCase = new CreateTaskService(loadPort, savePort);
+        deleteTaskUseCase = new DeleteTaskService(loadPort,savePort);
+
     }
     @Test
     void startTestToEditTaskMenu(){
@@ -51,7 +52,7 @@ class ContextMenuTest {
         InputStream inputStream = createInputStreamForInput("3\n");
         OutputStream outputStream = new ByteArrayOutputStream();
 
-        ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase);
+        ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
         User user = appDataMock.getUserList().get(0);
         contextMenu.start(user);
 
@@ -64,7 +65,7 @@ class ContextMenuTest {
         InputStream inputStream = createInputStreamForInput("1\nhallo\ncontent\n1\n2004-05-22 13:02");
         OutputStream outputStream = new ByteArrayOutputStream();
 
-        ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase);
+        ContextMenu contextMenu = new ContextMenu(inputStream, outputStream,editTaskMenu,createTaskUseCase, deleteTaskUseCase);
         User user = appDataMock.getUserList().get(0);
         contextMenu.start(user);
 
