@@ -25,9 +25,9 @@ public class AddTaskToProjectMenu {
 
     public void start(Project project, User user) {
          if (checkPermission(project, user)) {
-             output.println("What do you want to name your task? \n");
+             output.print("What do you want to name your task? \n\n");
              String title = input.nextLine();
-             output.println("Add content of your new task: \n");
+             output.print("Add content of your new task: \n\n");
              String content = input.nextLine();
 
              TaskState state = chooseTaskState(project);
@@ -45,7 +45,7 @@ public class AddTaskToProjectMenu {
 
     private boolean checkPermission(Project project, User user) {
         if (!project.getPermissions().containsKey(user) || project.getPermissions().get(user).equals(Boolean.FALSE)) {
-            output.println("You do not have the necessary permissions to add a task to this project");
+            output.print("You do not have the necessary permissions to add a task to this project\n");
             return Boolean.FALSE;
         } else {
             return Boolean.TRUE;
@@ -53,35 +53,35 @@ public class AddTaskToProjectMenu {
     }
 
     private Optional<LocalDateTime> chooseDeadline(Project project) {
-        output.println("Do you want to add a deadline to your task? (y/n) \n");
+        output.print("Do you want to add a deadline to your task? (y/n) \n\n");
         String deadlineChoice = input.nextLine();
         if (deadlineChoice.equals("y")) {
-            output.println("Please enter deadline: \n");
+            output.print("Please enter deadline: \n\n");
             try {
                 return Optional.of(LocalDateTime.parse(input.nextLine()));
             } catch (Exception e) {
-                output.println("Invalid input, please try again. ");
+                output.print("Invalid input, please try again. \n");
                 return chooseDeadline(project);
             }
         } else if (deadlineChoice.equals("n")) {
             return Optional.empty();
         } else {
-            output.println("Invalid input, please try again. \n");
+            output.print("Invalid input, please try again. \n\n");
             return chooseDeadline(project);
         }
     }
 
     private TaskState chooseTaskState(Project project) {
-        output.println("What state should your task have?");
-        output.println("Type 1 to set the taskState to IN_PROGRESS");
-        output.println("Type 2 to set the taskState to BACKLOG \n");
+        output.print("What state should your task have?\n");
+        output.print("Type 1 to set the taskState to IN_PROGRESS\n");
+        output.print("Type 2 to set the taskState to BACKLOG \n\n");
         String choice = input.nextLine();
         if (choice.equals("1")) {
             return TaskState.IN_PROGRESS;
         } else if (choice.equals("2")) {
             return TaskState.BACKLOG;
         } else {
-            output.println("Invalid input, please try again. \n");
+            output.print("Invalid input, please try again. \n\n");
             return chooseTaskState(project);
         }
     }
